@@ -13,8 +13,8 @@
     <artifactId>jialegou-item</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>jialegou-item-interface</module>
         <module>jialegou-item-service</module>
+        <module>jialegou-item-interface</module>
     </modules>
 
 
