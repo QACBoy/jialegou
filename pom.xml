@@ -13,6 +13,7 @@
         <module>jialegou-common</module>
         <module>jialegou-item</module>
         <module>jialegou-dal</module>
+        <module>jialegou-generator</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -39,11 +40,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+        <mybatis.plus.version>3.0.6</mybatis.plus.version>
         <mapper.starter.version>2.0.3</mapper.starter.version>
         <mysql.version>5.1.32</mysql.version>
         <pageHaper.starter.version>1.2.5</pageHaper.starter.version>
         <jialegou.latest.version>1.0.0-SNAPSHOT</jialegou.latest.version>
-        <fastDFS.client.version>1.0.0-SNAPSHOT</fastDFS.client.version>
+        <fastDFS.client.version>1.26.1-RELEASE</fastDFS.client.version>
     </properties>
 
     <dependencyManagement>
@@ -55,6 +57,16 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>com.baomidou</groupId>-->
+                <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
+                <!--<version>RELEASE</version>-->
+            <!--</dependency>-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
             </dependency>
             <!-- 通用 Mapper 启动器 -->
             <dependency>

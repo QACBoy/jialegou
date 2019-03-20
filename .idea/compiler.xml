@@ -9,6 +9,7 @@
         <module name="jialegou-common" />
         <module name="jialegou-dal" />
         <module name="jialegou-gateway" />
+        <module name="jialegou-generator" />
         <module name="jialegou-item-interface" />
         <module name="jialegou-item-service" />
         <module name="jialegou-registry" />
