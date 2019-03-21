@@ -1,4 +1,4 @@
-package com.hilkr.item.service;
+package com.hilkr.item;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

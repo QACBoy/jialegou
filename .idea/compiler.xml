@@ -13,6 +13,7 @@
         <module name="jialegou-item-interface" />
         <module name="jialegou-item-service" />
         <module name="jialegou-registry" />
+        <module name="jialegou-upload" />
       </profile>
     </annotationProcessing>
   </component>

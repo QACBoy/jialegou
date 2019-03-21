@@ -14,6 +14,7 @@
         <module>jialegou-item</module>
         <module>jialegou-dal</module>
         <module>jialegou-generator</module>
+        <module>jialegou-upload</module>
     </modules>
 
     <packaging>pom</packaging>
