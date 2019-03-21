@@ -1,4 +1,4 @@
-package com.hilkr.common.gateway.config;
+package com.hilkr.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

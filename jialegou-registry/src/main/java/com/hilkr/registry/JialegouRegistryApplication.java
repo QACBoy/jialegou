@@ -1,4 +1,4 @@
-package com.hilkr.common.registry;
+package com.hilkr.registry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
