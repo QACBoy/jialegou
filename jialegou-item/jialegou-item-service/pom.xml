@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.hilkr.service</groupId>
     <artifactId>jialegou-item-service</artifactId>
 
     <dependencies>
@@ -20,10 +21,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-spring-boot-starter</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>tk.mybatis</groupId>-->
+            <!--<artifactId>mapper-spring-boot-starter</artifactId>-->
+        <!--</dependency>-->
         <!--分页助手启动器-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -41,7 +42,7 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.hilkr.common</groupId>
+            <groupId>com.hilkr</groupId>
             <artifactId>jialegou-dal</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>

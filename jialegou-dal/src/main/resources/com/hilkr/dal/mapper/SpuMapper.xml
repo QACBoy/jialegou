@@ -1,0 +1,234 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.hilkr.dal.dao.SpuMapper">-->
+  <!--<resultMap id="BaseResultMap" type="com.hilkr.dal.model.Spu">-->
+    <!--<id column="id" jdbcType="BIGINT" property="id" />-->
+    <!--<result column="title" jdbcType="VARCHAR" property="title" />-->
+    <!--<result column="sub_title" jdbcType="VARCHAR" property="subTitle" />-->
+    <!--<result column="cid1" jdbcType="BIGINT" property="cid1" />-->
+    <!--<result column="cid2" jdbcType="BIGINT" property="cid2" />-->
+    <!--<result column="cid3" jdbcType="BIGINT" property="cid3" />-->
+    <!--<result column="brand_id" jdbcType="BIGINT" property="brandId" />-->
+    <!--<result column="saleable" jdbcType="BIT" property="saleable" />-->
+    <!--<result column="valid" jdbcType="BIT" property="valid" />-->
+    <!--<result column="spu_create_time" jdbcType="TIMESTAMP" property="spuCreateTime" />-->
+    <!--<result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />-->
+    <!--<result column="remark" jdbcType="VARCHAR" property="remark" />-->
+    <!--<result column="create_by" jdbcType="INTEGER" property="createBy" />-->
+    <!--<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />-->
+    <!--<result column="update_by" jdbcType="INTEGER" property="updateBy" />-->
+    <!--<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />-->
+    <!--<result column="del_flg" jdbcType="INTEGER" property="delFlg" />-->
+  <!--</resultMap>-->
+  <!--<sql id="Base_Column_List">-->
+    <!--id, title, sub_title, cid1, cid2, cid3, brand_id, saleable, valid, spu_create_time, -->
+    <!--last_update_time, remark, create_by, create_time, update_by, update_time, del_flg-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from spu-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
+    <!--delete from spu-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.hilkr.dal.model.Spu">-->
+    <!--insert into spu (id, title, sub_title, -->
+      <!--cid1, cid2, cid3, brand_id, -->
+      <!--saleable, valid, spu_create_time, -->
+      <!--last_update_time, remark, create_by, -->
+      <!--create_time, update_by, update_time, -->
+      <!--del_flg)-->
+    <!--values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, -->
+      <!--#{cid1,jdbcType=BIGINT}, #{cid2,jdbcType=BIGINT}, #{cid3,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, -->
+      <!--#{saleable,jdbcType=BIT}, #{valid,jdbcType=BIT}, #{spuCreateTime,jdbcType=TIMESTAMP}, -->
+      <!--#{lastUpdateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, -->
+      <!--#{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, -->
+      <!--#{delFlg,jdbcType=INTEGER})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.hilkr.dal.model.Spu">-->
+    <!--insert into spu-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+      <!--<if test="id != null">-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="title != null">-->
+        <!--title,-->
+      <!--</if>-->
+      <!--<if test="subTitle != null">-->
+        <!--sub_title,-->
+      <!--</if>-->
+      <!--<if test="cid1 != null">-->
+        <!--cid1,-->
+      <!--</if>-->
+      <!--<if test="cid2 != null">-->
+        <!--cid2,-->
+      <!--</if>-->
+      <!--<if test="cid3 != null">-->
+        <!--cid3,-->
+      <!--</if>-->
+      <!--<if test="brandId != null">-->
+        <!--brand_id,-->
+      <!--</if>-->
+      <!--<if test="saleable != null">-->
+        <!--saleable,-->
+      <!--</if>-->
+      <!--<if test="valid != null">-->
+        <!--valid,-->
+      <!--</if>-->
+      <!--<if test="spuCreateTime != null">-->
+        <!--spu_create_time,-->
+      <!--</if>-->
+      <!--<if test="lastUpdateTime != null">-->
+        <!--last_update_time,-->
+      <!--</if>-->
+      <!--<if test="remark != null">-->
+        <!--remark,-->
+      <!--</if>-->
+      <!--<if test="createBy != null">-->
+        <!--create_by,-->
+      <!--</if>-->
+      <!--<if test="createTime != null">-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="updateBy != null">-->
+        <!--update_by,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null">-->
+        <!--update_time,-->
+      <!--</if>-->
+      <!--<if test="delFlg != null">-->
+        <!--del_flg,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+      <!--<if test="id != null">-->
+        <!--#{id,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="title != null">-->
+        <!--#{title,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="subTitle != null">-->
+        <!--#{subTitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cid1 != null">-->
+        <!--#{cid1,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="cid2 != null">-->
+        <!--#{cid2,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="cid3 != null">-->
+        <!--#{cid3,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="brandId != null">-->
+        <!--#{brandId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="saleable != null">-->
+        <!--#{saleable,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="valid != null">-->
+        <!--#{valid,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="spuCreateTime != null">-->
+        <!--#{spuCreateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="lastUpdateTime != null">-->
+        <!--#{lastUpdateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="remark != null">-->
+        <!--#{remark,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createBy != null">-->
+        <!--#{createBy,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null">-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateBy != null">-->
+        <!--#{updateBy,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null">-->
+        <!--#{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="delFlg != null">-->
+        <!--#{delFlg,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.hilkr.dal.model.Spu">-->
+    <!--update spu-->
+    <!--<set>-->
+      <!--<if test="title != null">-->
+        <!--title = #{title,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="subTitle != null">-->
+        <!--sub_title = #{subTitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cid1 != null">-->
+        <!--cid1 = #{cid1,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="cid2 != null">-->
+        <!--cid2 = #{cid2,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="cid3 != null">-->
+        <!--cid3 = #{cid3,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="brandId != null">-->
+        <!--brand_id = #{brandId,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="saleable != null">-->
+        <!--saleable = #{saleable,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="valid != null">-->
+        <!--valid = #{valid,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="spuCreateTime != null">-->
+        <!--spu_create_time = #{spuCreateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="lastUpdateTime != null">-->
+        <!--last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="remark != null">-->
+        <!--remark = #{remark,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createBy != null">-->
+        <!--create_by = #{createBy,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null">-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateBy != null">-->
+        <!--update_by = #{updateBy,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null">-->
+        <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="delFlg != null">-->
+        <!--del_flg = #{delFlg,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.hilkr.dal.model.Spu">-->
+    <!--update spu-->
+    <!--set title = #{title,jdbcType=VARCHAR},-->
+      <!--sub_title = #{subTitle,jdbcType=VARCHAR},-->
+      <!--cid1 = #{cid1,jdbcType=BIGINT},-->
+      <!--cid2 = #{cid2,jdbcType=BIGINT},-->
+      <!--cid3 = #{cid3,jdbcType=BIGINT},-->
+      <!--brand_id = #{brandId,jdbcType=BIGINT},-->
+      <!--saleable = #{saleable,jdbcType=BIT},-->
+      <!--valid = #{valid,jdbcType=BIT},-->
+      <!--spu_create_time = #{spuCreateTime,jdbcType=TIMESTAMP},-->
+      <!--last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},-->
+      <!--remark = #{remark,jdbcType=VARCHAR},-->
+      <!--create_by = #{createBy,jdbcType=INTEGER},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--update_by = #{updateBy,jdbcType=INTEGER},-->
+      <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--del_flg = #{delFlg,jdbcType=INTEGER}-->
+    <!--where id = #{id,jdbcType=BIGINT}-->
+  <!--</update>-->
+<!--</mapper>-->

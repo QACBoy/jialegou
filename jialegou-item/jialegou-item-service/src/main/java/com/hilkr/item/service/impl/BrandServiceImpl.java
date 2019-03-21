@@ -3,9 +3,9 @@ package com.hilkr.item.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hilkr.common.dal.dao.BrandMapper;
-import com.hilkr.common.dal.model.Brand;
-import com.hilkr.common.dal.model.Category;
+import com.hilkr.dal.dao.BrandMapper;
+import com.hilkr.dal.model.Brand;
+import com.hilkr.dal.model.Category;
 import com.hilkr.common.enums.ExceptionEnum;
 import com.hilkr.common.exception.JialegouException;
 import com.hilkr.common.vo.PageResult;
@@ -52,6 +52,7 @@ public class BrandServiceImpl implements IBrandService {
         }
         List<Brand> brandList = brandMapper.selectList(queryWrapper);
         if (CollectionUtils.isEmpty(brandList)) {
+            // TODO ： 缺少返回类型包装
             throw new JialegouException(ExceptionEnum.BRAND_NOT_FOUND);
         }
 

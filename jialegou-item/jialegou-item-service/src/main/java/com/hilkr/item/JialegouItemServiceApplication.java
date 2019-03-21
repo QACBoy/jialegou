@@ -17,7 +17,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication
 @MapperScan({
         "com.baomidou.mybatisplus.samples.quickstart.mapper",
-        "com.hilkr.common.dal"
+        "com.hilkr.dal"
 })
 public class JialegouItemServiceApplication {
 

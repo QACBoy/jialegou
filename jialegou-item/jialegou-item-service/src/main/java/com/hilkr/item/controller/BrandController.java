@@ -1,6 +1,6 @@
 package com.hilkr.item.controller;
 
-import com.hilkr.common.dal.model.Brand;
+import com.hilkr.dal.model.Brand;
 import com.hilkr.common.vo.PageResult;
 import com.hilkr.item.service.IBrandService;
 import com.hilkr.item.vo.BrandVo;

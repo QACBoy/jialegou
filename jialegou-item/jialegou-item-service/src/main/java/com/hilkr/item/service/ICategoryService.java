@@ -1,6 +1,6 @@
 package com.hilkr.item.service;
 
-import com.hilkr.common.dal.model.Category;
+import com.hilkr.dal.model.Category;
 
 import java.util.List;
 

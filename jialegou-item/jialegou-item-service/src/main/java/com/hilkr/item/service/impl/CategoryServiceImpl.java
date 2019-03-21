@@ -1,8 +1,8 @@
 package com.hilkr.item.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hilkr.common.dal.dao.CategoryMapper;
-import com.hilkr.common.dal.model.Category;
+import com.hilkr.dal.dao.CategoryMapper;
+import com.hilkr.dal.model.Category;
 import com.hilkr.common.enums.ExceptionEnum;
 import com.hilkr.common.exception.JialegouException;
 import com.hilkr.item.service.ICategoryService;

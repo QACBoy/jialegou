@@ -1,7 +1,7 @@
 package com.hilkr.item.service;
 
-import com.hilkr.common.dal.model.Brand;
-import com.hilkr.common.dal.model.Category;
+import com.hilkr.dal.model.Brand;
+import com.hilkr.dal.model.Category;
 import com.hilkr.common.vo.PageResult;
 import com.hilkr.item.vo.BrandVo;
 

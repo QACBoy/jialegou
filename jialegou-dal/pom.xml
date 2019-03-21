@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hilkr.common</groupId>
+    <groupId>com.hilkr</groupId>
     <artifactId>jialegou-dal</artifactId>
 
     <dependencies>

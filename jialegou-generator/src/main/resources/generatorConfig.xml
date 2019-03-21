@@ -45,18 +45,18 @@
                 targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
         -->
         <!-- 数据表对应的 model 层  -->
-        <javaModelGenerator targetPackage="com.hilkr.common.dal.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.hilkr.dal.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- sql mapper 映射配置文件 -->
-        <sqlMapGenerator targetPackage="com.hilkr.common.dal.mapper" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="com.hilkr.dal.mapper" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- mybatis3中的 mapper 接口 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hilkr.common.dal.dao" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hilkr.dal.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

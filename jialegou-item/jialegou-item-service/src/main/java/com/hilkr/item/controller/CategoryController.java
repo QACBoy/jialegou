@@ -1,6 +1,6 @@
 package com.hilkr.item.controller;
 
-import com.hilkr.common.dal.model.Category;
+import com.hilkr.dal.model.Category;
 import com.hilkr.item.service.IBrandService;
 import com.hilkr.item.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
