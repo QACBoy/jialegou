@@ -26,6 +26,7 @@ fdfs:
   thumb-image:
     height: 60
     width: 60
-#    TODO : 这是啥
+#   TODO： tracker 地址需要修改
   tracker-list:
-    - 192.168.82.100:22122
+    - 192.168.1.10:22122
+#    - 192.168.43.219:22122

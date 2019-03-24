@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author sam
  * @create 2019-03-21
  */
-public interface UploadService {
+public interface IUploadService {
 
     String uploadImage(MultipartFile file);
 }

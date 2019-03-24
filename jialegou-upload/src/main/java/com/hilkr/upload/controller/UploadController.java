@@ -1,6 +1,6 @@
 package com.hilkr.upload.controller;
 
-import com.hilkr.upload.service.UploadService;
+import com.hilkr.upload.service.IUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadController {
 
     @Autowired
-    private UploadService uploadService;
+    private IUploadService uploadService;
 
 
     /**

@@ -5,10 +5,11 @@ import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.hilkr.common.enums.ExceptionEnum;
 import com.hilkr.common.exception.JialegouException;
 import com.hilkr.upload.config.UploadProperties;
-import com.hilkr.upload.service.UploadService;
+import com.hilkr.upload.service.IUploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +26,8 @@ import java.io.IOException;
  */
 @Service
 @Slf4j
-public class UploadServiceImpl implements UploadService {
+// @EnableConfigurationProperties(UploadProperties.class)
+public class UploadServiceImpl implements IUploadService {
 
     @Autowired
     private UploadProperties prop;
@@ -45,11 +47,11 @@ public class UploadServiceImpl implements UploadService {
         try {
             BufferedImage image = ImageIO.read(file.getInputStream());
             if (image == null) {
-                log.info("【文件上传】上传文件格式错误");
+                log.info("【 文件上传 】上传文件格式错误");
                 throw new JialegouException(ExceptionEnum.INVALID_FILE_FORMAT);
             }
         } catch (IOException e) {
-            log.info("【文件上传】文件上传失败", e);
+            log.info("【 文件上传 】文件上传失败", e);
             throw new JialegouException(ExceptionEnum.INVALID_FILE_FORMAT);
         }
         //保存图片
