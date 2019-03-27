@@ -34,7 +34,7 @@ hystrix:
           thread:
             timeoutInMilliseconds: 7000
 ribbon:
-  connetTimeout: 500
+  connetTimeout: 5000
   readTimeout: 5000
 #jialegou:
 #  jwt:

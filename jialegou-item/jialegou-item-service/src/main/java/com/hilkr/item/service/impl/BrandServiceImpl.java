@@ -86,30 +86,30 @@ public class BrandServiceImpl implements IBrandService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateBrand(BrandVo brandVo) {
-        // Brand brand = new Brand();
-        // brand.setId(brandVo.getId());
-        // brand.setName(brandVo.getName());
-        // brand.setImage(brandVo.getImage());
-        // brand.setLetter(brandVo.getLetter());
-        //
-        // //更新
-        // int resultCount = brandMapper.updateByPrimaryKey(brand);
-        // if (resultCount == 0) {
-        //     throw new JialegouException(ExceptionEnum.UPDATE_BRAND_FAILED);
-        // }
-        // List<Long> cids = brandVo.getCids();
-        // //更新品牌分类表
-        //
-        //
-        // brandMapper.deleteCategoryBrandByBid(brandVo.getId());
-        //
-        // for (Long cid : cids) {
-        //     resultCount = brandMapper.insertCategoryBrand(cid, brandVo.getId());
-        //     if (resultCount == 0) {
-        //         throw new JialegouException(ExceptionEnum.UPDATE_BRAND_FAILED);
-        //     }
-        //
-        // }
+        Brand brand = new Brand();
+        brand.setId(brandVo.getId());
+        brand.setName(brandVo.getName());
+        brand.setImage(brandVo.getImage());
+        brand.setLetter(brandVo.getLetter().toString());
+
+        //更新
+        int resultCount = brandMapper.updateById(brand);
+        if (resultCount == 0) {
+            throw new JialegouException(ExceptionEnum.UPDATE_BRAND_FAILED);
+        }
+        List<Long> cids = brandVo.getCids();
+        //更新品牌分类表
+
+
+        brandMapper.deleteCategoryBrandByBid(brandVo.getId());
+
+        for (Long cid : cids) {
+            resultCount = brandMapper.insertCategoryBrand(cid, brandVo.getId());
+            if (resultCount == 0) {
+                throw new JialegouException(ExceptionEnum.UPDATE_BRAND_FAILED);
+            }
+
+        }
     }
     //
     @Transactional(rollbackFor = Exception.class)
@@ -137,14 +137,13 @@ public class BrandServiceImpl implements IBrandService {
     //
     @Override
     public Brand queryBrandByBid(Long id) {
-    //     Brand brand = new Brand();
-    //     brand.setId(id);
-    //     Brand b1 = brandMapper.selectByPrimaryKey(brand);
-    //     if (b1 == null) {
-    //         throw new JialegouException(ExceptionEnum.BRAND_NOT_FOUND);
-    //     }
-    //     return b1;
-        return null;
+        // Brand brand = new Brand();
+        // brand.setId(id);
+        Brand b1 = brandMapper.selectById(id);
+        if (b1 == null) {
+            throw new JialegouException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return b1;
     }
 
     @Override

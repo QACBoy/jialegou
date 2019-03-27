@@ -1,7 +1,10 @@
 package com.hilkr.dal.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.hilkr.dal.BaseModel;
 import lombok.Data;
+
+import javax.persistence.Column;
 
 @Data
 public class SpecParam extends BaseModel {
@@ -14,6 +17,7 @@ public class SpecParam extends BaseModel {
 
     private String name;
 
+    @TableField(value = "'numeric'")
     private Boolean numeric;
 
     private String unit;
