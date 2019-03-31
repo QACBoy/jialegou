@@ -1,9 +1,9 @@
 package com.hilkr.dal.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.hilkr.dal.BaseModel;
 import lombok.Data;
 
-import javax.persistence.Transient;
 import java.util.List;
 
 @Data
@@ -15,6 +15,6 @@ public class SpecGroup extends BaseModel {
 
     private String name;
 
-    // @Transient
-    // private List<SpecParam> params;
+    @TableField(exist = false)
+    private List<SpecParam> params;
 }

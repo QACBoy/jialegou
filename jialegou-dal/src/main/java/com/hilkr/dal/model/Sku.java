@@ -1,5 +1,6 @@
 package com.hilkr.dal.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.hilkr.dal.BaseModel;
 import lombok.Data;
 
@@ -27,5 +28,11 @@ public class Sku extends BaseModel {
     private Date skuCreateTime;
 
     private Date lastUpdateTime;
+
+    /**
+     * 库存
+     */
+    @TableField(exist = false)
+    private Integer stock;
 
 }

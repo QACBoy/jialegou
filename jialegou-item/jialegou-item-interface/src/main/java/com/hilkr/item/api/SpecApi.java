@@ -1,7 +1,7 @@
 package com.hilkr.item.api;
 
-import com.hilkr.item.pojo.SpecGroup;
-import com.hilkr.item.pojo.SpecParam;
+import com.hilkr.dal.model.SpecGroup;
+import com.hilkr.dal.model.SpecParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

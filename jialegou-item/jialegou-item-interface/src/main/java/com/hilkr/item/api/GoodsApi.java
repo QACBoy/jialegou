@@ -1,10 +1,10 @@
 package com.hilkr.item.api;
 
 import com.hilkr.common.vo.PageResult;
+import com.hilkr.dal.model.Sku;
+import com.hilkr.dal.model.Spu;
+import com.hilkr.dal.model.SpuDetail;
 import com.hilkr.item.dto.CartDto;
-import com.hilkr.item.pojo.Sku;
-import com.hilkr.item.pojo.Spu;
-import com.hilkr.item.pojo.SpuDetail;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

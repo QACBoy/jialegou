@@ -30,7 +30,6 @@ public class CategoryServiceImpl implements ICategoryService {
     public List<Category> queryCategoryByPid(Long pid) {
 
         List<Category> list = categoryMapper.selectList(new QueryWrapper<Category>().eq("parent_id",pid));
-        // categoryMapper.selectList()
         if (CollectionUtils.isEmpty(list)){
             throw new JialegouException(ExceptionEnum.CATEGORY_NOT_FOUND);
         }

@@ -1,19 +1,19 @@
 package com.hilkr.item.service;
 
+import com.hilkr.common.vo.PageResult;
 import com.hilkr.dal.model.Brand;
 import com.hilkr.dal.model.Category;
-import com.hilkr.common.vo.PageResult;
 import com.hilkr.item.vo.BrandVo;
 
 import java.util.List;
 
+
 /**
  * 描述: <br>
- * < TODO >
+ * TODO
  *
- * @author linkr
+ * @author sam
  * @create 2019-03-21
- * @since TODO
  */
 public interface IBrandService {
 

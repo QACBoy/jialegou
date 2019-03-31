@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.hilkr.dal.BaseModel;
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 public class SpecParam extends BaseModel {
 

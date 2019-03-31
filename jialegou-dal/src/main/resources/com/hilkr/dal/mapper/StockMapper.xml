@@ -37,6 +37,19 @@
       <!--#{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, -->
       <!--#{delFlg,jdbcType=INTEGER})-->
   <!--</insert>-->
+<insert id="insertList" parameterType="com.hilkr.dal.model.Stock">
+    insert into stock (sku_id, seckill_stock, seckill_total,
+      stock, remark, create_by,
+      create_time, update_by, update_time,
+      del_flg)
+    values
+    <foreach collection="stocks" item="stock" separator=",">
+        (#{stock.skuId,jdbcType=BIGINT}, #{stock.seckillStock,jdbcType=INTEGER}, #{stock.seckillTotal,jdbcType=INTEGER},
+        #{stock.stock,jdbcType=INTEGER}, #{stock.remark,jdbcType=VARCHAR}, #{stock.createBy,jdbcType=INTEGER},
+        #{stock.createTime,jdbcType=TIMESTAMP}, #{stock.updateBy,jdbcType=INTEGER}, #{stock.updateTime,jdbcType=TIMESTAMP},
+        #{stock.delFlg,jdbcType=INTEGER})
+    </foreach>
+  </insert>
   <!--<insert id="insertSelective" parameterType="com.hilkr.dal.model.Stock">-->
     <!--insert into stock-->
     <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->

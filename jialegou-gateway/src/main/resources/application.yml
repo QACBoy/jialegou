@@ -12,6 +12,9 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
 zuul:
+#  host:
+#      connect-timeout-millis: 15000
+#      socket-timeout-millis: 60000
   prefix: /api
   routes:
     item-service: /item/**
@@ -32,10 +35,16 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 7000
+            timeoutInMilliseconds: 60000
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: false
 ribbon:
-  connetTimeout: 5000
-  readTimeout: 5000
+  connetTimeout: 10000
+  readTimeout: 10000
 #jialegou:
 #  jwt:
 #    pubKeyPath: /Users/bystander/id_rsa.pub # 公钥地址

@@ -137,8 +137,6 @@ public class BrandServiceImpl implements IBrandService {
     //
     @Override
     public Brand queryBrandByBid(Long id) {
-        // Brand brand = new Brand();
-        // brand.setId(id);
         Brand b1 = brandMapper.selectById(id);
         if (b1 == null) {
             throw new JialegouException(ExceptionEnum.BRAND_NOT_FOUND);

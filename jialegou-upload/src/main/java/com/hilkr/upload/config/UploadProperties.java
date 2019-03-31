@@ -6,9 +6,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 /**
- * @author bystander
- * @date 2018/9/16
+ * 描述: <br>
+ * TODO
+ *
+ * @author sam
+ * @create 2019-03-23
  */
 @Data
 @ConfigurationProperties(prefix = "jialegou.upload")

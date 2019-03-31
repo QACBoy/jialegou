@@ -95,11 +95,12 @@ public class SpecServiceImpl implements ISpecService {
 
     @Override
     public void updateSpecParam(SpecParam specParam) {
+        int count = specParamMapper.updateById(specParam);
+        // TODO
         // int count = specParamMapper.updateByPrimaryKeySelective(specParam);
-        // if (count != 1) {
-        //     throw new JialegouException(ExceptionEnum.UPDATE_SPEC_PARAM_FAILED);
-        // }
-        return;
+        if (count != 1) {
+            throw new JialegouException(ExceptionEnum.UPDATE_SPEC_PARAM_FAILED);
+        }
     }
 
     @Override
@@ -123,17 +124,27 @@ public class SpecServiceImpl implements ISpecService {
         //遍历specParams
         for (SpecParam param : specParams) {
             Long groupId = param.getGroupId();
-            if (!map.keySet().contains(param.getGroupId())) {
+            if (!map.keySet().contains(groupId)) {
                 //map中key不包含这个组ID
                 map.put(param.getGroupId(), new ArrayList<>());
             }
             //添加进map中
-            map.get(param.getGroupId()).add(param);
+            map.get(groupId).add(param);
         }
-
-        // for (SpecGroup specGroup : specGroups) {
-        //     specGroup.setParams(map.get(specGroup.getId()));
+        //TODO
+        // for (SpecParam param : specParams) {
+        //     Long groupId = param.getGroupId();
+        //     if (!map.keySet().contains(param.getGroupId())) {
+        //         //map中key不包含这个组ID
+        //         map.put(param.getGroupId(), new ArrayList<>());
+        //     }
+        //     //添加进map中
+        //     map.get(param.getGroupId()).add(param);
         // }
+
+        for (SpecGroup specGroup : specGroups) {
+            specGroup.setParams(map.get(specGroup.getId()));
+        }
 
         return specGroups;
     }

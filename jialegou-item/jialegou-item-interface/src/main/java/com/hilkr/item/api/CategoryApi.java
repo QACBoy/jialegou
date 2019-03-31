@@ -1,6 +1,6 @@
 package com.hilkr.item.api;
 
-import com.hilkr.item.pojo.Category;
+import com.hilkr.dal.model.Category;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
