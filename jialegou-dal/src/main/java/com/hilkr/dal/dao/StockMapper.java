@@ -22,6 +22,7 @@ public interface StockMapper extends BaseMapper<Stock> {
     // int updateByPrimaryKeySelective(Stock record);
     //
     // int updateByPrimaryKey(Stock record);
+
     int insertList(@Param("stocks") List<Stock> stocks);
 
 }

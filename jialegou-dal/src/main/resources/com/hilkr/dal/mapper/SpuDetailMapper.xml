@@ -1,6 +1,6 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
-<!--<mapper namespace="com.hilkr.dal.dao.SpuDetailMapper">-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hilkr.dal.dao.SpuDetailMapper">
   <!--<resultMap id="BaseResultMap" type="com.hilkr.dal.model.SpuDetail">-->
     <!--<id column="spu_id" jdbcType="BIGINT" property="spuId" />-->
     <!--<result column="generic_spec" jdbcType="VARCHAR" property="genericSpec" />-->
@@ -195,4 +195,4 @@
       <!--del_flg = #{delFlg,jdbcType=INTEGER}-->
     <!--where spu_id = #{spuId,jdbcType=BIGINT}-->
   <!--</update>-->
-<!--</mapper>-->
+</mapper>

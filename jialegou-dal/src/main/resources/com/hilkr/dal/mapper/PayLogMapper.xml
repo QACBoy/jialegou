@@ -1,6 +1,6 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
-<!--<mapper namespace="com.hilkr.dal.dao.PayLogMapper">-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hilkr.dal.dao.PayLogMapper">
   <!--<resultMap id="BaseResultMap" type="com.hilkr.dal.model.PayLog">-->
     <!--<id column="order_id" jdbcType="BIGINT" property="orderId" />-->
     <!--<result column="total_fee" jdbcType="BIGINT" property="totalFee" />-->
@@ -232,4 +232,4 @@
       <!--del_flg = #{delFlg,jdbcType=INTEGER}-->
     <!--where order_id = #{orderId,jdbcType=BIGINT}-->
   <!--</update>-->
-<!--</mapper>-->
+</mapper>

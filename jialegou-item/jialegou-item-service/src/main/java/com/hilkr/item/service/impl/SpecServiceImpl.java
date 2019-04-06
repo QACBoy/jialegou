@@ -96,8 +96,6 @@ public class SpecServiceImpl implements ISpecService {
     @Override
     public void updateSpecParam(SpecParam specParam) {
         int count = specParamMapper.updateById(specParam);
-        // TODO
-        // int count = specParamMapper.updateByPrimaryKeySelective(specParam);
         if (count != 1) {
             throw new JialegouException(ExceptionEnum.UPDATE_SPEC_PARAM_FAILED);
         }

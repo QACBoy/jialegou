@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Slf4j
 @Service
+// TODO: org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.hilkr.dal.dao.StockMapper.insertList
 public class GoodsServiceImpl implements IGoodsService {
 
     @Autowired
@@ -57,39 +58,33 @@ public class GoodsServiceImpl implements IGoodsService {
     // TODO：当查询全部数据的时候，zuul 回报超时错误
     @Override
     public PageResult<Spu> querySpuByPage(Integer page, Integer rows, String key, Boolean saleable) {
-        //分页
+        // 分页
         if (rows == -1){
             rows = Integer.MAX_VALUE;
         }
         PageHelper.startPage(page, rows);
 
-        // Example example = new Example(Spu.class);
-        // Example.Criteria criteria = example.createCrterina();
         QueryWrapper<Spu> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotBlank(key)) {
             queryWrapper.like("title", "%" + key + "%");
-            // criteria.andLike("title", "%" + key + "%");
         }
         if (saleable != null) {
             queryWrapper.or();
             queryWrapper.eq("saleable", saleable);
-            // criteria.orEqualTo("saleable", saleable);
         }
-        //默认以上一次更新时间排序
+        // 默认以上一次更新时间排序
         queryWrapper.orderByDesc("last_update_time");
-        // example.setOrderByClause("last_update_time desc");
 
-        //只查询未删除的商品
+        // 只查询未删除的商品
         queryWrapper.eq("valid", 1);
-        // criteria.andEqualTo("valid", 1);
 
-        //查询
+        // 查询
         List<Spu> spuList = spuMapper.selectList(queryWrapper);
 
         if (CollectionUtils.isEmpty(spuList)) {
             throw new JialegouException(ExceptionEnum.SPU_NOT_FOUND);
         }
-        //对查询结果中的分类名和品牌名进行处理
+        // 对查询结果中的分类名和品牌名进行处理
         handleCategoryAndBrand(spuList);
 
         PageInfo<Spu> pageInfo = new PageInfo<>(spuList);
@@ -181,7 +176,6 @@ public class GoodsServiceImpl implements IGoodsService {
         sku.setSpuId(spu.getId());
         QueryWrapper<Sku> queryWrapper = new QueryWrapper<Sku>().setEntity(sku);
         List<Sku> skuList = skuMapper.selectList(queryWrapper);
-        // List<Sku> skuList = skuMapper.select(sku);
 
         if (!CollectionUtils.isEmpty(skuList)) {
             //删除所有sku
@@ -220,7 +214,6 @@ public class GoodsServiceImpl implements IGoodsService {
     public void handleSaleable(Spu spu) {
         spu.setSaleable(!spu.getSaleable());
         int count = spuMapper.updateById(spu);
-        // int count = spuMapper.updateByPrimaryKeySelective(spu);
         if (count != 1) {
             throw new JialegouException(ExceptionEnum.UPDATE_SALEABLE_ERROR);
         }
@@ -229,7 +222,6 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public Spu querySpuBySpuId(Long spuId) {
         //根据spuId查询spu
-        // Spu spu = spuMapper.selectByPrimaryKey(spuId);
         Spu spu = spuMapper.selectById(spuId);
 
         //查询spuDetail
@@ -293,8 +285,8 @@ public class GoodsServiceImpl implements IGoodsService {
 
         for (Sku sku : skuList) {
             sku.setSpuId(spu.getId());
-            sku.setCreateTime(new Date());
-            sku.setLastUpdateTime(sku.getCreateTime());
+            sku.setSkuCreateTime(new Date());
+            sku.setLastUpdateTime(sku.getSkuCreateTime());
             int count = skuMapper.insert(sku);
             if (count != 1) {
                 throw new JialegouException(ExceptionEnum.GOODS_SAVE_ERROR);
