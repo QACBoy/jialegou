@@ -1,9 +1,9 @@
 package com.hilkr.item.controller;
 
 import com.hilkr.dal.model.Category;
-import com.hilkr.item.service.IBrandService;
 import com.hilkr.item.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,48 +23,124 @@ public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
 
-    @Autowired
-    private IBrandService brandService;
-
     /**
-     * 根据父节 id 查询商品分类
+     * 根据父节点查询商品类目
      *
      * @param pid
      * @return
      */
     @GetMapping("/list")
-    public ResponseEntity<List<Category>> queryCategoryByPid(@RequestParam("pid") Long pid){
-        List<Category> categoryList = categoryService.queryCategoryByPid(pid);
-        return ResponseEntity.ok(categoryList);
+    public ResponseEntity<List<Category>> queryCategoryByPid(@RequestParam("pid") Long pid) {
+
+        //如果pid的值为-1那么需要获取数据库中最后一条数据
+        if (pid == -1) {
+            List<Category> last = this.categoryService.queryLast();
+            return ResponseEntity.ok(last);
+        } else {
+            List<Category> list = this.categoryService.queryCategoryByPid(pid);
+            if (list == null) {
+                //没有找到返回404
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+            //找到返回200
+            return ResponseEntity.ok(list);
+        }
     }
+
     /**
-     * 根据品牌ID查询商品分类
+     * 用于修改品牌信息时，商品分类信息的回显
      *
      * @param bid
      * @return
      */
     @GetMapping("bid/{bid}")
-    public ResponseEntity<List<Category>> queryCategoryByBid(@PathVariable("bid") Long bid) {
-        return ResponseEntity.ok(brandService.queryCategoryByBid(bid));
+    public ResponseEntity<List<Category>> queryByBrandId(@PathVariable("bid") Long bid) {
+        List<Category> list = this.categoryService.queryByBrandId(bid);
+        if (list == null || list.size() < 1) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(list);
+    }
+
+
+    /**
+     * 保存
+     *
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity<Void> saveCategory(Category category) {
+        this.categoryService.saveCategory(category);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     /**
-     * 根据商品分类Ids查询分类
+     * 更新
+     *
+     * @return
+     */
+    @PutMapping
+    public ResponseEntity<Void> updateCategory(Category category) {
+        this.categoryService.updateCategory(category);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    /**
+     * 删除
+     *
+     * @return
+     */
+    @DeleteMapping("cid/{cid}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable("cid") Long id) {
+        this.categoryService.deleteCategory(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /**
+     * 根据分类id集合查询分类名称
+     *
      * @param ids
      * @return
      */
-    @GetMapping("list/ids")
-    public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids") List<Long> ids) {
-        return ResponseEntity.ok(categoryService.queryCategoryByIds(ids));
+    @GetMapping("names")
+    public ResponseEntity<List<String>> queryNameByIds(@RequestParam("ids") List<Long> ids) {
+        List<String> list = categoryService.queryNameByIds(ids);
+        if (list == null || list.size() < 1) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            return ResponseEntity.ok(list);
+        }
     }
 
     /**
-     * 根据cid3查询三级分类
+     * 根据分类id集合查询分类名称
+     *
+     * @param ids
+     * @return
+     */
+    @GetMapping("all")
+    public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids") List<Long> ids) {
+        List<Category> list = categoryService.queryCategoryByIds(ids);
+        if (list == null || list.size() < 1) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            return ResponseEntity.ok(list);
+        }
+    }
+
+    /**
+     * 根据分类id集合查询分类名称
+     *
      * @param id
      * @return
      */
-    @GetMapping("all/level")
-    public ResponseEntity<List<Category>> queryAllByCid3(@RequestParam("id") Long id) {
-        return ResponseEntity.ok(categoryService.queryAllByCid3(id));
+    @GetMapping("all/level/{cid3}")
+    public ResponseEntity<List<Category>> queryAllCategoryLevelByCid3(@PathVariable("cid3") Long id) {
+        List<Category> list = categoryService.queryAllCategoryLevelByCid3(id);
+        if (list == null || list.size() < 1) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            return ResponseEntity.ok(list);
+        }
     }
 }

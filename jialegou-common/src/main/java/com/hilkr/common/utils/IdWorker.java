@@ -23,43 +23,68 @@ import java.net.NetworkInterface;
  * @author Polim
  */
 public class IdWorker {
-    // 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
+    /**
+     *  时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
+     */
     private final static long twepoch = 1288834974657L;
-    // 机器标识位数
+    /**
+     *  机器标识位数
+      */
     private final static long workerIdBits = 5L;
-    // 数据中心标识位数
+    /**
+     * 数据中心标识位数
+     */
     private final static long datacenterIdBits = 5L;
-    // 机器ID最大值
+    /**
+     * 机器ID最大值
+     */
     private final static long maxWorkerId = -1L ^ (-1L << workerIdBits);
-    // 数据中心ID最大值
+    /**
+     * 数据中心ID最大值
+     */
     private final static long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
-    // 毫秒内自增位
+    /**
+     * 毫秒内自增位
+     */
     private final static long sequenceBits = 12L;
-    // 机器ID偏左移12位
+    /**
+     * 机器ID偏左移12位
+     */
     private final static long workerIdShift = sequenceBits;
-    // 数据中心ID左移17位
+    /**
+     * 数据中心ID左移17位
+     */
     private final static long datacenterIdShift = sequenceBits + workerIdBits;
-    // 时间毫秒左移22位
+    /**
+     * 时间毫秒左移22位
+     */
     private final static long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
 
     private final static long sequenceMask = -1L ^ (-1L << sequenceBits);
-    /* 上次生产id时间戳 */
+    /**
+     * 上次生产id时间戳
+     */
     private static long lastTimestamp = -1L;
-    // 0，并发控制
+    /**
+     * 并发控制
+     */
     private long sequence = 0L;
 
     private final long workerId;
-    // 数据标识id部分
+    /**
+     * 数据标识id部分
+     */
     private final long datacenterId;
 
-    public IdWorker() {
+    public IdWorker(){
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
-
     /**
-     * @param workerId     工作机器ID
-     * @param datacenterId 序列号
+     * @param workerId
+     *            工作机器ID
+     * @param datacenterId
+     *            序列号
      */
     public IdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
@@ -71,7 +96,6 @@ public class IdWorker {
         this.workerId = workerId;
         this.datacenterId = datacenterId;
     }
-
     /**
      * 获取下一个ID
      *
@@ -124,14 +148,14 @@ public class IdWorker {
         mpid.append(datacenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
         if (!name.isEmpty()) {
-            /*
-             * GET jvmPid
-             */
+         /*
+          * GET jvmPid
+          */
             mpid.append(name.split("@")[0]);
         }
-        /*
-         * MAC + PID 的 hashcode 获取16个低位
-         */
+      /*
+       * MAC + PID 的 hashcode 获取16个低位
+       */
         return (mpid.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
     }
 
@@ -159,17 +183,5 @@ public class IdWorker {
         return id;
     }
 
-
-    public static void main(String[] args) {
-
-        IdWorker idWorker = new IdWorker(0, 0);
-
-        for (int i = 0; i < 100; i++) {
-            long nextId = idWorker.nextId();
-            System.out.println(nextId);
-        }
-
-
-    }
 
 }

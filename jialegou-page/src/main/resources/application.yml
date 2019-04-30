@@ -1,0 +1,22 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: page-service
+  thymeleaf:
+    cache: false
+  rabbitmq:
+    host: 192.168.43.219
+    username: jialegou
+    password: jialegou
+    virtual-host: /jialegou
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+jialegou:
+  webpage:
+    path: /Users/sam/Documents/Developer/swe15086/jialegou/jialegou-page/src/main/resources/webpages

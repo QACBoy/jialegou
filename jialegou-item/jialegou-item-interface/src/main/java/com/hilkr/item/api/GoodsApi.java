@@ -2,8 +2,8 @@ package com.hilkr.item.api;
 
 import com.hilkr.common.vo.PageResult;
 import com.hilkr.dal.model.Sku;
-import com.hilkr.dal.model.Spu;
 import com.hilkr.dal.model.SpuDetail;
+import com.hilkr.item.bo.SpuBo;
 import com.hilkr.item.dto.CartDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,63 +13,64 @@ import java.util.List;
  * @author bystander
  * @date 2018/9/22
  */
+@RequestMapping("goods")
 public interface GoodsApi {
 
     /**
-     * 分页查询商品
-     *
+     * 分页查询
      * @param page
      * @param rows
-     * @param saleable
+     * @param sortBy
+     * @param desc
      * @param key
+     * @param saleable
      * @return
      */
     @GetMapping("/spu/page")
-    PageResult<Spu> querySpuByPage(
+    PageResult<SpuBo> querySpuByPage(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "5") Integer rows,
-            @RequestParam(value = "saleable", defaultValue = "true") Boolean saleable,
-            @RequestParam(value = "key", required = false) String key);
-
+            @RequestParam(value = "sortBy", required = false) String sortBy,
+            @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+            @RequestParam(value = "key", required = false) String key,
+            @RequestParam(value = "saleable",defaultValue = "true") Boolean saleable);
     /**
      * 根据spu商品id查询详情
-     *
      * @param id
      * @return
      */
     @GetMapping("/spu/detail/{id}")
-    SpuDetail querySpuDetailById(@PathVariable("id") Long id);
+    SpuDetail querySpuDetailBySpuId(@PathVariable("id") Long id);
 
     /**
-     * 根据spu的id查询sku
-     *
+     * 根据Spu的id查询其下所有的sku
      * @param id
      * @return
      */
-    @GetMapping("sku/list")
-    List<Sku> querySkuBySpuId(@RequestParam("id") Long id);
+    @GetMapping("sku/list/{id}")
+    List<Sku> querySkuBySpuId(@PathVariable("id") Long id);
 
     /**
-     * 根据sku ids查询sku
-     * @param ids
+     * 根据id查询商品
+     * @param id
      * @return
      */
-    @GetMapping("sku/list/ids")
-    List<Sku> querySkusByIds(@RequestParam("ids") List<Long> ids);
-
+    @GetMapping("/spu/{id}")
+    SpuBo queryGoodsById(@PathVariable("id") Long id);
 
     /**
-     * 根据spuId查询spu及skus
-     * @param spuId
+     * 根据sku的id查询sku
+     * @param id
      * @return
      */
-    @GetMapping("spu/{id}")
-    Spu querySpuBySpuId(@PathVariable("id") Long spuId);
+    @GetMapping("/sku/{id}")
+    Sku querySkuById(@PathVariable("id") Long id);
+
 
     /**
-     * 减库存
-     * @param cartDTOS
+     * 查询秒杀商品
+     * @return
      */
-    @PostMapping("stock/decrease")
-    void decreaseStock(@RequestBody List<CartDto> cartDTOS);
+    // @GetMapping("/seckill/list")
+    // ResponseEntity<List<SeckillGoods>> querySeckillGoods();
 }

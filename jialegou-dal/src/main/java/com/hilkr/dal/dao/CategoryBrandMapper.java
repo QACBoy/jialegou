@@ -1,18 +1,19 @@
 package com.hilkr.dal.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hilkr.dal.model.CategoryBrand;
+import com.hilkr.dal.model.Category;
+import com.hilkr.dal.model.CategoryBrandKey;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
-public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
-//     int deleteByPrimaryKey(CategoryBrandKey key);
-//
-//     int insert(CategoryBrand record);
-//
-//     int insertSelective(CategoryBrand record);
-//
-//     CategoryBrand selectByPrimaryKey(CategoryBrandKey key);
-//
-//     int updateByPrimaryKeySelective(CategoryBrand record);
-//
-//     int updateByPrimaryKey(CategoryBrand record);
+import java.util.List;
+
+public interface CategoryBrandMapper extends BaseMapper<CategoryBrandKey> {
+
+    int deleteByPrimaryKey(CategoryBrandKey key);
+
+    int insert(CategoryBrandKey record);
+
+    int insertSelective(CategoryBrandKey record);
 }

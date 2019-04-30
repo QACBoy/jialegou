@@ -1,9 +1,10 @@
 package com.hilkr.item.controller;
 
+import com.hilkr.common.parameter.pojo.SpuQueryByPageParameter;
 import com.hilkr.common.vo.PageResult;
 import com.hilkr.dal.model.Sku;
-import com.hilkr.dal.model.Spu;
 import com.hilkr.dal.model.SpuDetail;
+import com.hilkr.item.bo.SpuBo;
 import com.hilkr.item.dto.CartDto;
 import com.hilkr.item.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -22,120 +24,188 @@ import java.util.List;
  * @create 2019-03-29
  */
 @RestController
+@RequestMapping("goods")
 public class GoodsController {
 
     @Autowired
     private IGoodsService goodsService;
 
-    @GetMapping("spu/page")
-    public ResponseEntity<PageResult<Spu>> querySpuByPage(
-            @RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "rows", defaultValue = "5") Integer rows,
-            @RequestParam(value = "key", required = false) String key,
-            @RequestParam(value = "saleable", required = false) Boolean saleable
-    ) {
-        return ResponseEntity.ok(goodsService.querySpuByPage(page, rows, key, saleable));
-    }
 
     /**
-     * 查询spu详情
-     *
-     * @param spuId
+     * 分页查询
+     * @param page
+     * @param rows
+     * @param sortBy
+     * @param desc
+     * @param key
+     * @param saleable
      * @return
      */
-    @GetMapping("spu/detail/{spuId}")
-    public ResponseEntity<SpuDetail> querySpuDetailBySpuId(@PathVariable("spuId") Long spuId) {
-        return ResponseEntity.ok(goodsService.querySpuDetailBySpuId(spuId));
+    @GetMapping("/spu/page")
+    public ResponseEntity<PageResult<SpuBo>> querySpuByPage(
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "5") Integer rows,
+            @RequestParam(value = "sortBy", required = false) String sortBy,
+            @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+            @RequestParam(value = "key", required = false) String key,
+            @RequestParam(value = "saleable",defaultValue = "true") Boolean saleable){
+        SpuQueryByPageParameter spuQueryByPageParameter = new SpuQueryByPageParameter(page,rows,sortBy,desc,key,saleable);
+        //分页查询spu信息
+        PageResult<SpuBo> result = this.goodsService.querySpuByPageAndSort(spuQueryByPageParameter);
+        System.out.println("查询数据量："+result.getTotal());
+        return ResponseEntity.ok(result);
     }
 
     /**
-     * 根据spuId查询商品详情
-     *
+     * 保存商品
+     * @param spu
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity<Void> saveGoods(@RequestBody SpuBo spu){
+        this.goodsService.saveGoods(spu);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    /**
+     * 修改商品
+     * @param spuBo
+     * @return
+     */
+    @PutMapping
+    public ResponseEntity<Void> updateGoods(@RequestBody SpuBo spuBo){
+        this.goodsService.updateGoods(spuBo);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    /**
+     * 根据id查询商品
      * @param id
      * @return
      */
-    @GetMapping("sku/list")
-    public ResponseEntity<List<Sku>> querySkuBySpuId(@RequestParam("id") Long id) {
-        return ResponseEntity.ok(goodsService.querySkuBySpuId(id));
-
+    @GetMapping("/spu/{id}")
+    public ResponseEntity<SpuBo> queryGoodsById(@PathVariable("id") Long id){
+        SpuBo spuBo=this.goodsService.queryGoodsById(id);
+        if (spuBo == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(spuBo);
     }
 
     /**
-     * 根据sku ids查询sku
-     *
+     * 根据Spu的id查询其下所有的sku
+     * @param id
+     * @return
+     */
+    @GetMapping("sku/list/{id}")
+    public ResponseEntity<List<Sku>> querySkuBySpuId(@PathVariable("id") Long id){
+        List<Sku> list = this.goodsService.querySkuBySpuId(id);
+        if (list == null || list.size() < 1){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }else {
+            return ResponseEntity.ok(list);
+        }
+    }
+
+    /**
+     * 根据spu商品id查询详情
+     * @param id
+     * @return
+     */
+    @GetMapping("/spu/detail/{id}")
+    public ResponseEntity<SpuDetail> querySpuDetailBySpuId(@PathVariable("id") Long id){
+        SpuDetail spuDetail = this.goodsService.querySpuDetailBySpuId(id);
+        if (spuDetail == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }else {
+            return ResponseEntity.ok(spuDetail);
+        }
+    }
+
+    /**
+     * 商品上下架
      * @param ids
      * @return
      */
-    @GetMapping("sku/list/ids")
-    public ResponseEntity<List<Sku>> querySkusByIds(@RequestParam("ids") List<Long> ids) {
-        return ResponseEntity.ok(goodsService.querySkusByIds(ids));
-    }
+    @PutMapping("/spu/out/{id}")
+    public ResponseEntity<Void> goodsSoldOut(@PathVariable("id") String ids){
 
+        String separator="-";
+        if (ids.contains(separator)){
+            String[] goodsId = ids.split(separator);
+            for (String id:goodsId){
+                this.goodsService.goodsSoldOut(Long.parseLong(id));
+            }
+        }
+        else {
+            this.goodsService.goodsSoldOut(Long.parseLong(ids));
+        }
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
     /**
      * 删除商品
-     *
-     * @param spuId
+     * @param ids
      * @return
      */
-    @DeleteMapping("spu/spuId/{spuId}")
-    public ResponseEntity<Void> deleteGoodsBySpuId(@PathVariable("spuId") Long spuId) {
-        goodsService.deleteGoodsBySpuId(spuId);
-        return ResponseEntity.ok().build();
-    }
-
-
-    /**
-     * 添加商品
-     *
-     * @param spu
-     * @return
-     */
-    @PostMapping("goods")
-    public ResponseEntity<Void> addGoods(@RequestBody Spu spu) {
-        goodsService.addGoods(spu);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @DeleteMapping("/spu/{id}")
+    public ResponseEntity<Void> deleteGoods(@PathVariable("id") String ids){
+        String separator="-";
+        if (ids.contains(separator)){
+            String[] goodsId = ids.split(separator);
+            for (String id:goodsId){
+                this.goodsService.deleteGoods(Long.parseLong(id));
+            }
+        }
+        else {
+            this.goodsService.deleteGoods(Long.parseLong(ids));
+        }
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     /**
-     * 更新商品
-     *
-     * @param spu
+     * 根据id查询sku
+     * @param id
      * @return
      */
-    @PutMapping("goods")
-    public ResponseEntity<Void> updateGoods(@RequestBody Spu spu) {
-        goodsService.updateGoods(spu);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping("spu/saleable")
-    public ResponseEntity<Void> handleSaleable(@RequestBody Spu spu) {
-        goodsService.handleSaleable(spu);
-        return ResponseEntity.ok().build();
-
+    @GetMapping("/sku/{id}")
+    public ResponseEntity<Sku> querySkuById(@PathVariable("id") Long id){
+        Sku sku = this.goodsService.querySkuById(id);
+        if (sku == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(sku);
     }
 
     /**
-     * 根据spuId查询spu及skus
-     *
-     * @param spuId
+     * 查询秒杀商品
      * @return
      */
-    @GetMapping("spu/{id}")
-    public ResponseEntity<Spu> querySpuBySpuId(@PathVariable("id") Long spuId) {
-        return ResponseEntity.ok(goodsService.querySpuBySpuId(spuId));
-    }
+    // @GetMapping("/seckill/list")
+    // public ResponseEntity<List<SeckillGoods>> querySeckillGoods(){
+    //     List<SeckillGoods> list = this.goodsService.querySeckillGoods();
+    //     if (list == null || list.size() < 0){
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    //     }
+    //     return ResponseEntity.ok(list);
+    // }
 
     /**
-     * 减库存
-     *
-     * @param cartDtos
+     * 添加秒杀商品
+     * @param seckillParameters
      * @return
+     * @throws ParseException
      */
-    @PostMapping("stock/decrease")
-    public ResponseEntity<Void> decreaseStock(@RequestBody List<CartDto> cartDtos) {
-        goodsService.decreaseStock(cartDtos);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+    // @PostMapping("/seckill/add")
+    // public ResponseEntity<Boolean> addSeckillGoods(@RequestBody List<SeckillParameter> seckillParameters) throws ParseException {
+    //     if (seckillParameters != null && seckillParameters.size() > 0){
+    //         for (SeckillParameter seckillParameter : seckillParameters){
+    //             this.goodsService.addSeckillGoods(seckillParameter);
+    //         }
+    //     }else {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    //     }
+    //     return ResponseEntity.ok().build();
+    // }
+
 }

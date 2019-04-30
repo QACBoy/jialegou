@@ -1,17 +1,8 @@
 package com.hilkr.dal.model;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hilkr.dal.BaseModel;
-import lombok.Data;
-
-import java.beans.Transient;
 import java.util.Date;
-import java.util.List;
 
-@Data
-public class Spu extends BaseModel {
-
+public class Spu {
     private Long id;
 
     private String title;
@@ -30,36 +21,110 @@ public class Spu extends BaseModel {
 
     private Boolean valid;
 
-    private Date spuCreateTime;
+    private Date createTime;
 
-    @JsonIgnore
     private Date lastUpdateTime;
 
-    // @Transient
-    /**
-     * spu所属的分类名称
-     */
-    @TableField(exist = false)
-    private String cname;
+    public Long getId() {
+        return id;
+    }
 
-    // @Transient
-    /**
-     * spu所属品牌名
-     */
-    @TableField(exist = false)
-    private String bname;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    // @Transient
-    /**
-     * spu详情
-     */
-    @TableField(exist = false)
-    private SpuDetail spuDetail;
+    public String getTitle() {
+        return title;
+    }
 
-    // @Transient
-    /**
-     * sku集合
-     */
-    @TableField(exist = false)
-    private List<Sku> skus;
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle == null ? null : subTitle.trim();
+    }
+
+    public Long getCid1() {
+        return cid1;
+    }
+
+    public void setCid1(Long cid1) {
+        this.cid1 = cid1;
+    }
+
+    public Long getCid2() {
+        return cid2;
+    }
+
+    public void setCid2(Long cid2) {
+        this.cid2 = cid2;
+    }
+
+    public Long getCid3() {
+        return cid3;
+    }
+
+    public void setCid3(Long cid3) {
+        this.cid3 = cid3;
+    }
+
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    public Boolean getSaleable() {
+        return saleable;
+    }
+
+    public void setSaleable(Boolean saleable) {
+        this.saleable = saleable;
+    }
+
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+    public Spu() {
+    }
+
+    public Spu(Long brandId, Long cid1, Long cid2, Long cid3, String title, String subTitle, Boolean saleable, Boolean valid, Date createTime, Date lastUpdateTime) {
+        this.brandId = brandId;
+        this.cid1 = cid1;
+        this.cid2 = cid2;
+        this.cid3 = cid3;
+        this.title = title;
+        this.subTitle = subTitle;
+        this.saleable = saleable;
+        this.valid = valid;
+        this.createTime = createTime;
+        this.lastUpdateTime = lastUpdateTime;
+    }
 }

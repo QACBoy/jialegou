@@ -17,7 +17,7 @@ import java.util.List;
 public class PageResult<T> {
 
     private Long total;
-    private Integer totalPage;
+    private Long totalPage;
     private List<T> items;
 
     public PageResult(Long total, List<T> items) {
@@ -25,7 +25,7 @@ public class PageResult<T> {
         this.items = items;
     }
 
-    public PageResult(Long total, Integer totalPage, List<T> items) {
+    public PageResult(Long total, Long totalPage, List<T> items) {
         this.total = total;
         this.totalPage = totalPage;
         this.items = items;

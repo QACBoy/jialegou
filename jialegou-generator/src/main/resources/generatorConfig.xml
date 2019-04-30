@@ -101,36 +101,31 @@
                注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
         -->
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
+        <table tableName="address" domainObjectName="Address" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="brand" domainObjectName="Brand" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="category" domainObjectName="Category" enableCountByExample="false"
-               enableUpdateByExample="false"
+        <table tableName="category" domainObjectName="Category" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="category_brand" domainObjectName="CategoryBrand" enableCountByExample="false"
-               enableUpdateByExample="false"
+        <table tableName="category_brand" domainObjectName="CategoryBrand" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="order" domainObjectName="Order" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="order_detail" domainObjectName="OrderDetail" enableCountByExample="false"
-               enableUpdateByExample="false"
+        <table tableName="order_detail" domainObjectName="OrderDetail" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="order_status" domainObjectName="OrderStatus" enableCountByExample="false"
-               enableUpdateByExample="false"
+        <table tableName="order_status" domainObjectName="OrderStatus" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="pay_log" domainObjectName="PayLog" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="seckill_order" domainObjectName="SeckillOrder" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="seckill_sku" domainObjectName="SeckillSku" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="sku" domainObjectName="Sku" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="spec_group" domainObjectName="SpecGroup" enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="spec_param" domainObjectName="SpecParam" enableCountByExample="false"
-               enableUpdateByExample="false"
+        <table tableName="specification" domainObjectName="Specification" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="spu" domainObjectName="Spu" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="spu_detail" domainObjectName="SpuDetail" enableCountByExample="false"
-               enableUpdateByExample="false"
+        <table tableName="spu_detail" domainObjectName="SpuDetail" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="stock" domainObjectName="Stock" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>

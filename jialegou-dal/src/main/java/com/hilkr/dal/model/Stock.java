@@ -1,17 +1,43 @@
 package com.hilkr.dal.model;
 
-import com.hilkr.dal.BaseModel;
-import lombok.Data;
-
-@Data
-public class Stock extends BaseModel {
-
+public class Stock {
     private Long skuId;
 
     private Integer seckillStock;
 
     private Integer seckillTotal;
 
-    private Integer stock;
+    private Long stock;
 
+    public Long getSkuId() {
+        return skuId;
+    }
+
+    public void setSkuId(Long skuId) {
+        this.skuId = skuId;
+    }
+
+    public Integer getSeckillStock() {
+        return seckillStock;
+    }
+
+    public void setSeckillStock(Integer seckillStock) {
+        this.seckillStock = seckillStock;
+    }
+
+    public Integer getSeckillTotal() {
+        return seckillTotal;
+    }
+
+    public void setSeckillTotal(Integer seckillTotal) {
+        this.seckillTotal = seckillTotal;
+    }
+
+    public Long getStock() {
+        return stock;
+    }
+
+    public void setStock(Long stock) {
+        this.stock = stock;
+    }
 }

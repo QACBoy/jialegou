@@ -1,9 +1,8 @@
 package com.hilkr.item.service;
 
+import com.hilkr.common.parameter.pojo.BrandQueryByPageParameter;
 import com.hilkr.common.vo.PageResult;
 import com.hilkr.dal.model.Brand;
-import com.hilkr.dal.model.Category;
-import com.hilkr.item.vo.BrandVo;
 
 import java.util.List;
 
@@ -17,19 +16,58 @@ import java.util.List;
  */
 public interface IBrandService {
 
-    PageResult<Brand> queryBrandByPageAndSort(Integer page, Integer rows, String sortBy, Boolean desc, String key);
+    /**
+     * 分页查询
+     *
+     * @param brandQueryByPageParameter
+     * @return
+     */
+    PageResult<Brand> queryBrandByPage(BrandQueryByPageParameter brandQueryByPageParameter);
 
+    /**
+     * 新增brand,并且维护中间表
+     *
+     * @param brand
+     * @param cids
+     */
     void saveBrand(Brand brand, List<Long> cids);
 
-    List<Category> queryCategoryByBid(Long bid);
+    /**
+     * 修改brand，并且维护中间表
+     *
+     * @param brand
+     * @param cids
+     */
+    void updateBrand(Brand brand, List<Long> cids);
 
-    void updateBrand(BrandVo brandVo);
+    /**
+     * 删除brand，并且维护中间表
+     *
+     * @param id
+     */
+    void deleteBrand(Long id);
 
-    void deleteBrand(Long bid);
 
-    List<Brand> queryBrandByCid(Long cid);
+    /**
+     * 根据brand Id 删除中间表中的数据
+     *
+     * @param bid
+     */
+    void deleteByBrandIdInCategoryBrand(Long bid);
 
-    Brand queryBrandByBid(Long id);
+    /**
+     * 根据category id查询brand
+     *
+     * @param cid
+     * @return
+     */
+    List<Brand> queryBrandByCategoryId(Long cid);
 
-    List<Brand> queryBrandByIds(List<Long> ids);
+    /**
+     * 根据品牌id集合查询品牌信息
+     *
+     * @param ids
+     * @return
+     */
+    List<Brand> queryBrandByBrandIds(List<Long> ids);
 }

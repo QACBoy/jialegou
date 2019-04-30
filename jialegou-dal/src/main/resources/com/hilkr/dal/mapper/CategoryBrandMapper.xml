@@ -1,128 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hilkr.dal.dao.CategoryBrandMapper">
-  <!--<resultMap id="BaseResultMap" type="com.hilkr.dal.model.CategoryBrand">-->
-    <!--<id column="category_id" jdbcType="BIGINT" property="categoryId" />-->
-    <!--<id column="brand_id" jdbcType="BIGINT" property="brandId" />-->
-    <!--<result column="remark" jdbcType="VARCHAR" property="remark" />-->
-    <!--<result column="create_by" jdbcType="INTEGER" property="createBy" />-->
-    <!--<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />-->
-    <!--<result column="update_by" jdbcType="INTEGER" property="updateBy" />-->
-    <!--<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />-->
-    <!--<result column="del_flg" jdbcType="INTEGER" property="delFlg" />-->
-  <!--</resultMap>-->
-  <!--<sql id="Base_Column_List">-->
-    <!--category_id, brand_id, remark, create_by, create_time, update_by, update_time, del_flg-->
-  <!--</sql>-->
-  <!--<select id="selectByPrimaryKey" parameterType="com.hilkr.dal.model.CategoryBrandKey" resultMap="BaseResultMap">-->
-    <!--select -->
-    <!--<include refid="Base_Column_List" />-->
-    <!--from category_brand-->
-    <!--where category_id = #{categoryId,jdbcType=BIGINT}-->
-      <!--and brand_id = #{brandId,jdbcType=BIGINT}-->
-  <!--</select>-->
-  <!--<delete id="deleteByPrimaryKey" parameterType="com.hilkr.dal.model.CategoryBrandKey">-->
-    <!--delete from category_brand-->
-    <!--where category_id = #{categoryId,jdbcType=BIGINT}-->
-      <!--and brand_id = #{brandId,jdbcType=BIGINT}-->
-  <!--</delete>-->
-  <!--<insert id="insert" parameterType="com.hilkr.dal.model.CategoryBrand">-->
-    <!--insert into category_brand (category_id, brand_id, remark, -->
-      <!--create_by, create_time, update_by, -->
-      <!--update_time, del_flg)-->
-    <!--values (#{categoryId,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, -->
-      <!--#{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, -->
-      <!--#{updateTime,jdbcType=TIMESTAMP}, #{delFlg,jdbcType=INTEGER})-->
-  <!--</insert>-->
-  <!--<insert id="insertSelective" parameterType="com.hilkr.dal.model.CategoryBrand">-->
-    <!--insert into category_brand-->
-    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
-      <!--<if test="categoryId != null">-->
-        <!--category_id,-->
-      <!--</if>-->
-      <!--<if test="brandId != null">-->
-        <!--brand_id,-->
-      <!--</if>-->
-      <!--<if test="remark != null">-->
-        <!--remark,-->
-      <!--</if>-->
-      <!--<if test="createBy != null">-->
-        <!--create_by,-->
-      <!--</if>-->
-      <!--<if test="createTime != null">-->
-        <!--create_time,-->
-      <!--</if>-->
-      <!--<if test="updateBy != null">-->
-        <!--update_by,-->
-      <!--</if>-->
-      <!--<if test="updateTime != null">-->
-        <!--update_time,-->
-      <!--</if>-->
-      <!--<if test="delFlg != null">-->
-        <!--del_flg,-->
-      <!--</if>-->
-    <!--</trim>-->
-    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
-      <!--<if test="categoryId != null">-->
-        <!--#{categoryId,jdbcType=BIGINT},-->
-      <!--</if>-->
-      <!--<if test="brandId != null">-->
-        <!--#{brandId,jdbcType=BIGINT},-->
-      <!--</if>-->
-      <!--<if test="remark != null">-->
-        <!--#{remark,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="createBy != null">-->
-        <!--#{createBy,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="createTime != null">-->
-        <!--#{createTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="updateBy != null">-->
-        <!--#{updateBy,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="updateTime != null">-->
-        <!--#{updateTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="delFlg != null">-->
-        <!--#{delFlg,jdbcType=INTEGER},-->
-      <!--</if>-->
-    <!--</trim>-->
-  <!--</insert>-->
-  <!--<update id="updateByPrimaryKeySelective" parameterType="com.hilkr.dal.model.CategoryBrand">-->
-    <!--update category_brand-->
-    <!--<set>-->
-      <!--<if test="remark != null">-->
-        <!--remark = #{remark,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="createBy != null">-->
-        <!--create_by = #{createBy,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="createTime != null">-->
-        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="updateBy != null">-->
-        <!--update_by = #{updateBy,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="updateTime != null">-->
-        <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="delFlg != null">-->
-        <!--del_flg = #{delFlg,jdbcType=INTEGER},-->
-      <!--</if>-->
-    <!--</set>-->
-    <!--where category_id = #{categoryId,jdbcType=BIGINT}-->
-      <!--and brand_id = #{brandId,jdbcType=BIGINT}-->
-  <!--</update>-->
-  <!--<update id="updateByPrimaryKey" parameterType="com.hilkr.dal.model.CategoryBrand">-->
-    <!--update category_brand-->
-    <!--set remark = #{remark,jdbcType=VARCHAR},-->
-      <!--create_by = #{createBy,jdbcType=INTEGER},-->
-      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
-      <!--update_by = #{updateBy,jdbcType=INTEGER},-->
-      <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
-      <!--del_flg = #{delFlg,jdbcType=INTEGER}-->
-    <!--where category_id = #{categoryId,jdbcType=BIGINT}-->
-      <!--and brand_id = #{brandId,jdbcType=BIGINT}-->
-  <!--</update>-->
+  <resultMap id="BaseResultMap" type="com.hilkr.dal.model.CategoryBrandKey">
+    <id column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <id column="brand_id" jdbcType="BIGINT" property="brandId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.hilkr.dal.model.CategoryBrandKey">
+    delete from category_brand
+    where category_id = #{categoryId,jdbcType=BIGINT}
+      and brand_id = #{brandId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hilkr.dal.model.CategoryBrandKey">
+    insert into category_brand (category_id, brand_id)
+    values (#{categoryId,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hilkr.dal.model.CategoryBrandKey">
+    insert into category_brand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
 </mapper>

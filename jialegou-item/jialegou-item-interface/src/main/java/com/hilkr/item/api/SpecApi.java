@@ -1,7 +1,6 @@
 package com.hilkr.item.api;
 
-import com.hilkr.dal.model.SpecGroup;
-import com.hilkr.dal.model.SpecParam;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,23 +14,12 @@ import java.util.List;
  */
 @RequestMapping("spec")
 public interface SpecApi {
-
     /**
-     * 查询规格参数组，及组内参数
-     * @param cid
+     * 查询商品分类对应的规格参数模板
+     * @param id
      * @return
      */
-    @GetMapping("{cid}")
-    List<SpecGroup> querySpecsByCid(@PathVariable("cid") Long cid);
-
-    @GetMapping("params")
-    List<SpecParam> querySpecParams(
-            @RequestParam(value = "gid", required = false) Long gid,
-            @RequestParam(value = "cid", required = false) Long cid,
-            @RequestParam(value = "searching", required = false) Boolean searching,
-            @RequestParam(value = "generic", required = false) Boolean generic
-    );
-
-    @GetMapping("groups/{cid}")
-    List<SpecGroup> querySpecGroupByCid(@PathVariable("cid") Long cid);
+    @GetMapping("{id}")
+    ResponseEntity<String> querySpecificationByCategoryId(@PathVariable("id") Long id);
 }
+

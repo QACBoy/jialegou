@@ -9,14 +9,10 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/***
- *
- * 描述：
- *
- * @author sam
- * @date 2019/3/4
- *
- */
+/**
+ * @author: 98050
+ * @create: 2018-04-25 09:13
+ **/
 public class NumberUtils {
 
     public static boolean isInt(Double num) {
@@ -32,17 +28,7 @@ public class NumberUtils {
         if(str == null || str.trim().equals("")){
             return false;
         }
-        return str.matches("^\\d+\\.?\\d+$");
-    }
-
-    public static double toDouble(String s){
-        if(s == null){
-            return 0;
-        }
-        if(!isDigit(s)){
-            return 0;
-        }
-        return Double.valueOf(s);
+        return str.matches("^\\d+$");
     }
 
     /**
@@ -56,9 +42,14 @@ public class NumberUtils {
         return bd.setScale(scale, RoundingMode.HALF_UP).doubleValue();
     }
 
-    // 从字符串中根据正则表达式寻找，返回找到的数字数组
+    /**
+     * 从字符串中根据正则表达式寻找，返回找到的数字数组
+     * @param value
+     * @param regex
+     * @return
+     */
     public static Double[] searchNumber(String value, String regex){
-        List<Double> doubles = new ArrayList();
+        List<Double> doubles = new ArrayList<>();
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
         if(matcher.find()) {

@@ -2,18 +2,24 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="jialegou-auth" />
         <module name="jialegou-common" />
         <module name="jialegou-dal" />
         <module name="jialegou-gateway" />
         <module name="jialegou-generator" />
         <module name="jialegou-item-interface" />
         <module name="jialegou-item-service" />
+        <module name="jialegou-page" />
         <module name="jialegou-registry" />
+        <module name="jialegou-search" />
         <module name="jialegou-upload" />
+        <module name="jialegou-users-interface" />
+        <module name="jialegou-users-service" />
       </profile>
     </annotationProcessing>
   </component>
