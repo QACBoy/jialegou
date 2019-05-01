@@ -7,6 +7,7 @@ import com.hilkr.auth.utils.JwtUtils;
 import com.hilkr.common.utils.CookieUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Feature: 登录授权
  */
 @Controller
-//@EnableConfigurationProperties(JwtProperties.class)
+@EnableConfigurationProperties(JwtProperties.class)
 public class AuthController {
 
     @Autowired
@@ -67,7 +68,7 @@ public class AuthController {
      * @return
      */
     @GetMapping("verify")
-    public ResponseEntity<UserInfo> verifyUser(@CookieValue("LY_TOKEN") String token, HttpServletRequest request,
+    public ResponseEntity<UserInfo> verifyUser(@CookieValue("JIALEGOU_TOKEN") String token, HttpServletRequest request,
                                                HttpServletResponse response) {
         try {
             //1.从token中解析token信息

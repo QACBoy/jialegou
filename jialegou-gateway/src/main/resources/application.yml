@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: api-gateway
+  rabbitmq:
+    virtual-host: /jialegou
+    username: jialegou
+    password: jialegou
+    host: 192.168.43.219
 eureka:
   client:
     service-url:
@@ -12,48 +17,43 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
 zuul:
-#  host:
-#      connect-timeout-millis: 15000
-#      socket-timeout-millis: 60000
-  prefix: /api
+  prefix: /api # 添加路由前缀
+  retryable: true
   routes:
-    item-service: /item/**
-#    user-service: /user/**
-#    auth-service: /auth/**
-#    cart-service: /cart/**
-#    order-service: /order-service/**
-    upload-service:
-      path: /upload/**
-      serviceId: upload-service
-      strip-prefix: false
-#    search-service: /search/**
-#  sensitive-headers:
-#  add-host-header: true
+    item-service: /item/**  #商品微服务
+    search-service: /search/**  #搜索微服务
+    user-service: /user/**  #用户微服务
+    auth-service: /auth/** #授权中心微服务
+    cart-service: /cart/** #购物车微服务
+    order-service: /** #订单微服务
+    seckill-service: /seckill/** #秒杀微服务
+    comments-service: /review/** #评论微服务
+  ignored-services:
+    - upload-service # 忽略upload-service服务
+  add-host-header: true #携带请求本身的head头信息
+  sensitive-headers: #匹配禁止使用的头信息，这里设置为null，否则set-cookie无效
+ribbon:
+  ConnectTimeout: 4000 # 连接超时时间(ms)
+  ReadTimeout: 2000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: true # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 60000
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        timeout:
-#          enabled: false
-ribbon:
-  connetTimeout: 10000
-  readTimeout: 10000
-#jialegou:
-#  jwt:
-#    pubKeyPath: /Users/bystander/id_rsa.pub # 公钥地址
-#    cookieName: LY_TOKEN # cookie的名称
-#  filter:
-#    allowPaths:
-#    - /api/auth
-#    - /api/search
-#    - /api/user/register
-#    - /api/user/check
-#    - /api/user/code
-#    - /api/item
+            timeoutInMillisecond: 10000 # 熔断超时时长：10000ms
+jialegou:
+  jwt:
+    cookieName: JIALEGOU_TOKEN # cookie的名称
+    pubKeyPath: /Users/sam/Documents/Developer/swe15086/jialegou/jialegou-auth/src/main/resources/key/rsa.pub # 公钥地址
+  filter:
+    allowPaths:
+    - /api/auth
+    - /api/search
+    - /api/user/register
+    - /api/user/check
+    - /api/user/code
+    - /api/item

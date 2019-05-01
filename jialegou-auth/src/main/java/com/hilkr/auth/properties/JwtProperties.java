@@ -1,10 +1,9 @@
 package com.hilkr.auth.properties;
 
 import com.hilkr.auth.utils.RsaUtils;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
@@ -140,7 +139,7 @@ public class JwtProperties {
      * @PostConstruct :在构造方法执行之后执行该方法
      */
     @PostConstruct
-    public void init(){
+    public void init() {
         try {
             File pubKey = new File(pubKeyPath);
             File priKey = new File(priKeyPath);
