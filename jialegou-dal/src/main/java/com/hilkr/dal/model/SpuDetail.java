@@ -1,5 +1,7 @@
 package com.hilkr.dal.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class SpuDetail {
     private Long spuId;
 

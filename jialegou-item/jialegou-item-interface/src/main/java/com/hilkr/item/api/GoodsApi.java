@@ -5,6 +5,7 @@ import com.hilkr.dal.model.Sku;
 import com.hilkr.dal.model.SpuDetail;
 import com.hilkr.item.bo.SpuBo;
 import com.hilkr.item.dto.CartDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @RequestMapping("goods")
 public interface GoodsApi {
+
 
     /**
      * 分页查询

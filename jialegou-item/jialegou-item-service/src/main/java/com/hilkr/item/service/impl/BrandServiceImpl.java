@@ -40,7 +40,12 @@ public class BrandServiceImpl implements IBrandService {
         /**
          * 1.分页
          */
-        PageHelper.startPage(brandQueryByPageParameter.getPage(), brandQueryByPageParameter.getRows());
+        Integer page = brandQueryByPageParameter.getPage();
+        Integer rows = brandQueryByPageParameter.getRows();
+        if (rows == -1) {
+            rows = 100;
+        }
+        PageHelper.startPage(page, Math.min(rows, 100));
 
         QueryWrapper<Brand> queryWrapper = new QueryWrapper<>();
         String key = brandQueryByPageParameter.getKey();

@@ -6,8 +6,6 @@ import com.hilkr.dal.model.SeckillOrder;
 public interface SeckillOrderMapper extends BaseMapper<SeckillOrder> {
     int deleteByPrimaryKey(Long id);
 
-    int insert(SeckillOrder record);
-
     int insertSelective(SeckillOrder record);
 
     SeckillOrder selectByPrimaryKey(Long id);

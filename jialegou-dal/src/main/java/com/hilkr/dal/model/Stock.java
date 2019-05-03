@@ -1,6 +1,9 @@
 package com.hilkr.dal.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+
 public class Stock {
+    @TableField(value = "sku_id")
     private Long skuId;
 
     private Integer seckillStock;

@@ -16,6 +16,17 @@
     from stock
     where sku_id = #{skuId,jdbcType=BIGINT}
   </select>
+  <select id="selectBatchSkuIdList" resultMap="BaseResultMap">
+    <if test="skuIdList != null and skuIdList.size() > 0">
+      select
+      <include refid="Base_Column_List" />
+      from stock
+      where sku_id in
+      <foreach collection="skuIdList" open="(" close=")" separator="," item="skuId">
+      #{skuId}
+      </foreach>
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from stock
     where sku_id = #{skuId,jdbcType=BIGINT}

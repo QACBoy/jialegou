@@ -2,6 +2,7 @@ package com.hilkr.users.controller;
 
 import com.hilkr.dal.model.User;
 import com.hilkr.users.service.IUserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -88,5 +89,12 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
-
+    @GetMapping("test/{id}")
+    public ResponseEntity<User> test(@PathVariable("id") Long id) {
+        User user = this.userService.test(id);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.ok(user);
+    }
 }

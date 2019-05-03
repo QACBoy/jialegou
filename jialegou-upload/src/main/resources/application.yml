@@ -21,7 +21,7 @@ jialegou:
       - image/bmp
     baseUrl: http://image.jialegou.com/
 fdfs:
-  connect-timeout: 600
+  connect-timeout: 800
   so-timeout: 2500
   thumb-image:
     height: 60

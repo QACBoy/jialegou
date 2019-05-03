@@ -188,4 +188,9 @@ public class UserServiceImpl implements IUserService {
         hashOperations.delete(username);
         return true;
     }
+
+    @Override
+    public User test(Long id){
+        return userMapper.selectTest(id);
+    }
 }

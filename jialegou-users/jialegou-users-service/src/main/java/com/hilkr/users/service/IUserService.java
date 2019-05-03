@@ -46,4 +46,6 @@ public interface IUserService {
      * @return
      */
     boolean updatePassword(String username, String oldPassword, String newPassword);
+
+    public User test(Long id);
 }

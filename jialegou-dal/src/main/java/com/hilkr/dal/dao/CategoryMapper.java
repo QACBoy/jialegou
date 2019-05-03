@@ -15,7 +15,7 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @param bid
      * @return
      */
-    @Select("SELECT * FROM tb_category WHERE id IN (SELECT category_id FROM tb_category_brand WHERE brand_id = #{bid}) ")
+    @Select("SELECT * FROM category WHERE id IN (SELECT category_id FROM category_brand WHERE brand_id = #{bid}) ")
     List<Category> queryByBrandId(@Param("bid") Long bid);
 
 
@@ -23,7 +23,7 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * 根据category id删除中间表相关数据
      * @param cid
      */
-    @Delete("DELETE FROM tb_category_brand WHERE category_id = #{cid}")
+    @Delete("DELETE FROM category_brand WHERE category_id = #{cid}")
     void deleteByCategoryIdInCategoryBrand(@Param("cid") Long cid);
 
     /**
@@ -31,14 +31,14 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @param id
      * @return
      */
-    @Select("SELECT name FROM tb_category WHERE id = #{id}")
+    @Select("SELECT name FROM category WHERE id = #{id}")
     String queryNameById(Long id);
 
     /**
      * 查询最后一条数据
      * @return
      */
-    @Select("SELECT * FROM `tb_category` WHERE id = (SELECT MAX(id) FROM tb_category)")
+    @Select("SELECT * FROM `category` WHERE id = (SELECT MAX(id) FROM category)")
     List<Category> selectLast();
     int deleteByPrimaryKey(Long id);
 

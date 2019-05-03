@@ -84,7 +84,7 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
         if (rows == -1) {
             rows = 100;
         }
-        PageHelper.startPage(spuQueryByPageParameter.getPage(), Math.min(spuQueryByPageParameter.getRows(), 100));
+        PageHelper.startPage(spuQueryByPageParameter.getPage(), Math.min(rows , 100));
 
         //2.创建查询条件
         QueryWrapper<Spu> queryWrapper = new QueryWrapper<>();
@@ -170,17 +170,17 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
          * 2.商品的包装清单、售后服务
          */
         Spu spu = this.spuMapper.selectById(id);
-        SpuDetail spuDetail = this.spuDetailMapper.selectById(spu.getId());
+        SpuDetail spuDetail = this.spuDetailMapper.selectByPrimaryKey(spu.getId());
 
         QueryWrapper<Sku> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("spuId", spu.getId());
+        queryWrapper.eq("spu_id", spu.getId());
         List<Sku> skuList = this.skuMapper.selectList(queryWrapper);
         List<Long> skuIdList = new ArrayList<>();
         for (Sku sku : skuList) {
             skuIdList.add(sku.getId());
         }
 
-        List<Stock> stocks = this.stockMapper.selectBatchIds(skuIdList);
+        List<Stock> stocks = this.stockMapper.selectBatchSkuIdList(skuIdList);
 
         for (Sku sku : skuList) {
             for (Stock stock : stocks) {
@@ -220,7 +220,7 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
 
         //更新spu详情
         SpuDetail spuDetail = spuBo.getSpuDetail();
-        String oldTemp = this.spuDetailMapper.selectById(spuBo.getId()).getSpecTemplate();
+        String oldTemp = this.spuDetailMapper.selectByPrimaryKey(spuBo.getId()).getSpecTemplate();
         if (spuDetail.getSpecTemplate().equals(oldTemp)) {
             //相等，sku update
             //更新sku和库存信息
@@ -249,7 +249,7 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
 
         Spu oldSpu = this.spuMapper.selectById(id);
         QueryWrapper<Sku> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("spuId", id);
+        queryWrapper.eq("spu_id", id);
         List<Sku> skuList = this.skuMapper.selectList(queryWrapper);
         if (oldSpu.getSaleable()) {
             //下架
@@ -288,11 +288,11 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
 
         //删除spu_detail中的数据
         QueryWrapper<SpuDetail> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("spuId", id);
+        queryWrapper.eq("spu_id", id);
         this.spuDetailMapper.delete(queryWrapper);
 
         QueryWrapper<Sku> skuQueryWrapper = new QueryWrapper<>();
-        skuQueryWrapper.eq("spuId", id);
+        skuQueryWrapper.eq("spu_id", id);
         List<Sku> skuList = this.skuMapper.selectList(skuQueryWrapper);
         for (Sku sku : skuList) {
             //删除sku中的数据
@@ -308,17 +308,19 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
 
     @Override
     public SpuDetail querySpuDetailBySpuId(long id) {
-        return this.spuDetailMapper.selectById(id);
+        SpuDetail spuDetail = new SpuDetail();
+        spuDetail.setSpuId(id);
+        return this.spuDetailMapper.selectOne(new QueryWrapper<SpuDetail>().setEntity(spuDetail));
     }
 
     @Override
     public List<Sku> querySkuBySpuId(Long id) {
         QueryWrapper<Sku> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("spuId", id);
+        queryWrapper.eq("spu_id", id);
         List<Sku> skuList = this.skuMapper.selectList(queryWrapper);
         for (Sku sku : skuList) {
             QueryWrapper<Stock> stockQueryWrapper = new QueryWrapper<>();
-            stockQueryWrapper.eq("skuId", sku.getId());
+            stockQueryWrapper.eq("sku_id", sku.getId());
             Stock stock = this.stockMapper.selectList(stockQueryWrapper).get(0);
             sku.setStock(stock.getStock());
         }
@@ -341,7 +343,7 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
     }
 
     /**
-     * 根据skuId查询sku
+     * 根据sku_id查询sku
      *
      * @param id
      * @return
@@ -355,7 +357,7 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
         //通过tag判断是insert还是update
         //获取当前数据库中spu_id = id的sku信息
         QueryWrapper<Sku> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("spuId", id);
+        queryWrapper.eq("spu_id", id);
         //oldList中保存数据库中spu_id = id 的全部sku
         List<Sku> oldList = this.skuMapper.selectList(queryWrapper);
         if (tag) {
@@ -411,7 +413,7 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
                 for (Sku sku : oldList) {
                     this.skuMapper.deleteById(sku.getId());
                     QueryWrapper<Stock> stockQueryWrapper = new QueryWrapper<>();
-                    queryWrapper.eq("skuId", sku.getId());
+                    queryWrapper.eq("sku_id", sku.getId());
                     this.stockMapper.delete(stockQueryWrapper);
                 }
             }
@@ -419,11 +421,11 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
             List<Long> ids = oldList.stream().map(Sku::getId).collect(Collectors.toList());
             //删除以前的库存
             QueryWrapper<Stock> stockQueryWrapper = new QueryWrapper<>();
-            queryWrapper.in("skuId", ids);
+            queryWrapper.in("sku_id", ids);
             this.stockMapper.delete(stockQueryWrapper);
             //删除以前的sku
             QueryWrapper<Sku> skuQueryWrapper = new QueryWrapper<>();
-            skuQueryWrapper.eq("spuId", id);
+            skuQueryWrapper.eq("spu_id", id);
             this.skuMapper.delete(skuQueryWrapper);
             //新增sku和库存
             saveSkuAndStock(skus, id);

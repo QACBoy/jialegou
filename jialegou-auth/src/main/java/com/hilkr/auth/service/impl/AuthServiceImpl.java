@@ -1,8 +1,8 @@
 package com.hilkr.auth.service.impl;
 
-import com.hilkr.auth.client.UserClient;
+import com.hilkr.auth.client.UsersClient;
 import com.hilkr.auth.entity.UserInfo;
-import com.hilkr.auth.properties.JwtProperties;
+import com.hilkr.auth.config.JwtProperties;
 import com.hilkr.auth.service.IAuthService;
 import com.hilkr.auth.utils.JwtUtils;
 import com.hilkr.dal.model.User;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements IAuthService {
 
     @Autowired
-    private UserClient userClient;
+    private UsersClient userClient;
 
     @Autowired
     private JwtProperties properties;
@@ -42,6 +42,7 @@ public class AuthServiceImpl implements IAuthService {
             //3.查询结果不为空，则生成token
             String token = JwtUtils.generateToken(new UserInfo(user.getId(), user.getUsername()),
                     properties.getPrivateKey(), properties.getExpire());
+            System.out.println("=========== token ==========\n" + token);
             return token;
 
         }catch (Exception e){

@@ -17,7 +17,7 @@ public interface BrandMapper extends BaseMapper<Brand> {
      * @param bid 品牌id
      * @return
      */
-    @Insert("INSERT INTO tb_category_brand (category_id, brand_id) VALUES (#{cid},#{bid})")
+    @Insert("INSERT INTO category_brand (category_id, brand_id) VALUES (#{cid},#{bid})")
     void insertCategoryBrand(@Param("cid") Long cid, @Param("bid") Long bid);
 
 
@@ -26,7 +26,7 @@ public interface BrandMapper extends BaseMapper<Brand> {
      *
      * @param bid
      */
-    @Delete("DELETE FROM tb_category_brand WHERE brand_id = #{bid}")
+    @Delete("DELETE FROM category_brand WHERE brand_id = #{bid}")
     void deleteByBrandIdInCategoryBrand(@Param("bid") Long bid);
 
     /**
@@ -35,7 +35,7 @@ public interface BrandMapper extends BaseMapper<Brand> {
      * @param cid
      * @return
      */
-    @Select("SELECT b.* FROM tb_brand b LEFT JOIN tb_category_brand cb ON b.id=cb.brand_id WHERE cb.category_id=#{cid}")
+    @Select("SELECT b.* FROM brand b LEFT JOIN category_brand cb ON b.id=cb.brand_id WHERE cb.category_id=#{cid}")
     List<Brand> queryBrandByCategoryId(Long cid);
 
     int deleteByPrimaryKey(Long id);

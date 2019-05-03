@@ -80,9 +80,12 @@ public class RsaUtils {
         // 获取公钥并写出
         byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
         writeFile(publicKeyFilename, publicKeyBytes);
+        System.out.println("公钥生成成功，存放位置：" + publicKeyFilename);
         // 获取私钥并写出
         byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
         writeFile(privateKeyFilename, privateKeyBytes);
+        System.out.println("私钥生成成功，存放位置：" + privateKeyFilename);
+
     }
 
     private static byte[] readFile(String fileName) throws Exception {

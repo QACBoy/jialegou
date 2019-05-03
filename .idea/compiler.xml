@@ -8,12 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jialegou-auth" />
+        <module name="jialegou-cart" />
         <module name="jialegou-common" />
         <module name="jialegou-dal" />
         <module name="jialegou-gateway" />
         <module name="jialegou-generator" />
         <module name="jialegou-item-interface" />
         <module name="jialegou-item-service" />
+        <module name="jialegou-order-interface" />
+        <module name="jialegou-order-service" />
         <module name="jialegou-page" />
         <module name="jialegou-registry" />
         <module name="jialegou-search" />

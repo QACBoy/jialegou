@@ -15,11 +15,11 @@
     <result column="label" jdbcType="VARCHAR" property="label" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, name, phone, zip_code, state, city, district, address, default_address, 
+    id, user_id, name, phone, zip_code, state, city, district, address, default_address,
     label
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from address
     where id = #{id,jdbcType=BIGINT}
@@ -29,13 +29,13 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.hilkr.dal.model.Address">
-    insert into address (id, user_id, name, 
-      phone, zip_code, state, 
-      city, district, address, 
+    insert into address (id, user_id, name,
+      phone, zip_code, state,
+      city, district, address,
       default_address, label)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
       #{defaultAddress,jdbcType=BIT}, #{label,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hilkr.dal.model.Address">

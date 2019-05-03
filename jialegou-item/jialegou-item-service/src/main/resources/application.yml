@@ -33,9 +33,15 @@ eureka:
     ip-address: 127.0.0.1
     lease-expiration-duration-in-seconds: 10 #10秒不发送就过期
     lease-renewal-interval-in-seconds: 5 #每隔5秒发一次心跳
+feign:
+  client:
+    config:
+      feignName:          #服务名，填写 default 为所有服务
+        connectTimeout: 40000
+        readTimeout: 20000
 ribbon:
-  ConnectTimeout: 4000 # 连接超时时间(ms)
-  ReadTimeout: 2000 # 通信超时时间(ms)
+  ConnectTimeout: 40000 # 连接超时时间(ms)
+  ReadTimeout: 20000 # 通信超时时间(ms)
   OkToRetryOnAllOperations: true # 是否对所有操作重试
   MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
   MaxAutoRetries: 1 # 同一实例的重试次数
@@ -45,8 +51,13 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMillisecond: 10000 # 熔断超时时长：10000ms
+            timeoutInMillisecond: 100000 # 熔断超时时长：10000ms
 logging:
   level:
     com:
       hilkr: debug
+mybatis-plus:
+  typeAliasesPackage: com.hilkr
+  mapper-locations: classpath:/com/hilkr/dal/mapper/*Mapper.xml
+  configuration:
+      map-underscore-to-camel-case: true

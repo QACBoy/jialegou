@@ -1,6 +1,6 @@
 package com.hilkr.auth.client;
 
-import com.hilkr.users.api.UserApi;
+import com.hilkr.users.api.UsersApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -10,6 +10,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author sam
  * @create 2019-04-21
  */
-@FeignClient(value = "user-service")
-public interface UserClient extends UserApi {
+@FeignClient(value = "users-service")
+public interface UsersClient extends UsersApi {
 }

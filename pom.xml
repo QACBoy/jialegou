@@ -20,6 +20,8 @@
         <module>jialegou-users</module>
         <module>jialegou-auth</module>
         <module>jialegou-sms</module>
+        <module>jialegou-cart</module>
+        <module>jialegou-order</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -1,10 +1,11 @@
 package com.hilkr.auth.controller;
 
 import com.hilkr.auth.entity.UserInfo;
-import com.hilkr.auth.properties.JwtProperties;
+import com.hilkr.auth.config.JwtProperties;
 import com.hilkr.auth.service.IAuthService;
 import com.hilkr.auth.utils.JwtUtils;
 import com.hilkr.common.utils.CookieUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  * @Time: 2018-10-23 22:43
  * @Feature: 登录授权
  */
+@Slf4j
 @Controller
-@EnableConfigurationProperties(JwtProperties.class)
+// @EnableConfigurationProperties(JwtProperties.class)
 public class AuthController {
 
     @Autowired
@@ -50,6 +53,7 @@ public class AuthController {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
+        log.info("========= request ==========\n" + request.getRequestURL().toString());
         //1.登录校验
         String token = this.authService.authentication(username, password);
         if (StringUtils.isBlank(token)) {
@@ -71,6 +75,7 @@ public class AuthController {
     public ResponseEntity<UserInfo> verifyUser(@CookieValue("JIALEGOU_TOKEN") String token, HttpServletRequest request,
                                                HttpServletResponse response) {
         try {
+            log.info("========= request ==========\n " + request.getRequestURL().toString());
             //1.从token中解析token信息
             UserInfo userInfo = JwtUtils.getInfoFromToken(token, this.properties.getPublicKey());
             //2.解析成功要重新刷新token

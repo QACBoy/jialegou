@@ -1,7 +1,10 @@
 package com.hilkr.users;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.hilkr.BaseApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
@@ -14,8 +17,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan(value = "com.hilkr.dal.mapper")
-public class JialegouUsersApplication {
+public class JialegouUsersApplication extends BaseApplication {
     public static void main(String[] args) {
         SpringApplication.run(JialegouUsersApplication.class);
     }

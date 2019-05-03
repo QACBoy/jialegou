@@ -1,6 +1,8 @@
 package com.hilkr.dal.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.Date;
 
@@ -8,6 +10,7 @@ public class Sku {
 
     private Long id;
 
+    @TableField(value = "spu_id")
     private Long spuId;
 
     private String title;

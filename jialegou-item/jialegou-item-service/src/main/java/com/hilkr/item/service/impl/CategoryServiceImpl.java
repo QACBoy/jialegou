@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public List<Category> queryCategoryByPid(Long pid) throws JialegouException {
         QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parentId", pid);
+        queryWrapper.eq("parent_id", pid);
         List<Category> list = categoryMapper.selectList(queryWrapper);
         if (CollectionUtils.isEmpty(list)) {
             throw new JialegouException(ExceptionEnum.CATEGORY_NOT_FOUND);
@@ -114,7 +114,7 @@ public class CategoryServiceImpl implements ICategoryService {
         } else {
             //1.查询此节点的父亲节点的孩子个数 ===> 查询还有几个兄弟
             QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("parentId", category.getParentId());
+            queryWrapper.eq("parent_id", category.getParentId());
             List<Category> list = this.categoryMapper.selectList(queryWrapper);
             if (list.size() != 1) {
                 //有兄弟,直接删除自己
@@ -206,7 +206,7 @@ public class CategoryServiceImpl implements ICategoryService {
             leafNode.add(category);
         }
         QueryWrapper<Category> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("parentId", category.getId());
+        queryWrapper.eq("parent_id", category.getId());
         List<Category> list = this.categoryMapper.selectList(queryWrapper);
 
         for (Category category1 : list) {
@@ -224,7 +224,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
         node.add(category);
         QueryWrapper<Category> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("parentId", category.getId());
+        queryWrapper.eq("parent_id", category.getId());
         List<Category> list = this.categoryMapper.selectList(queryWrapper);
 
         for (Category category1 : list) {

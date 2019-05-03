@@ -6,8 +6,6 @@ import com.hilkr.dal.model.SpuDetail;
 public interface SpuDetailMapper extends BaseMapper<SpuDetail> {
     int deleteByPrimaryKey(Long spuId);
 
-    int insert(SpuDetail record);
-
     int insertSelective(SpuDetail record);
 
     SpuDetail selectByPrimaryKey(Long spuId);

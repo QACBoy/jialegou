@@ -14,11 +14,14 @@ import java.util.List;
  *
  */
 @Data
-public class PageResult<T> {
+public class PageResult<T>{
 
     private Long total;
     private Long totalPage;
     private List<T> items;
+
+    public PageResult() {
+    }
 
     public PageResult(Long total, List<T> items) {
         this.total = total;
@@ -30,6 +33,4 @@ public class PageResult<T> {
         this.totalPage = totalPage;
         this.items = items;
     }
-
-
 }
