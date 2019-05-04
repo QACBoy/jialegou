@@ -20,15 +20,15 @@ public class SwaggerConfig {
                 .host("localhost:8089")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.leyou.order.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.hilkr.order.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("乐优商城订单系统")
-                .description("乐优商城订单系统接口文档")
+                .title("嘉.乐购订单系统")
+                .description("嘉.乐购订单系统接口文档")
                 .version("1.0")
                 .build();
     }

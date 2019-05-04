@@ -9,6 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="jialegou-auth" />
         <module name="jialegou-cart" />
+        <module name="jialegou-comments-interface" />
+        <module name="jialegou-comments-service" />
         <module name="jialegou-common" />
         <module name="jialegou-dal" />
         <module name="jialegou-gateway" />
@@ -18,8 +20,11 @@
         <module name="jialegou-order-interface" />
         <module name="jialegou-order-service" />
         <module name="jialegou-page" />
+        <module name="jialegou-payment" />
         <module name="jialegou-registry" />
         <module name="jialegou-search" />
+        <module name="jialegou-seckill-interface" />
+        <module name="jialegou-seckill-service" />
         <module name="jialegou-sms" />
         <module name="jialegou-upload" />
         <module name="jialegou-users-interface" />

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author: 98050
  * @create: 2018-10-27 11:38
  **/
-//@ConfigurationProperties(prefix = "leyou.pay")
+//@ConfigurationProperties(prefix = "jialegou.pay")
 @Configuration
 @RefreshScope
 public class PayProperties {
@@ -16,31 +16,31 @@ public class PayProperties {
     /**
      * 公众账号ID
      */
-    @Value("${leyou.pay.appId}")
+    @Value("${jialegou.pay.appId}")
     private String appId;
 
     /**
      * 商户号
      */
-    @Value("${leyou.pay.mchId}")
+    @Value("${jialegou.pay.mchId}")
     private String mchId;
 
     /**
      * 生成签名的密钥
      */
-    @Value("${leyou.pay.key}")
+    @Value("${jialegou.pay.key}")
     private String key;
 
     /**
      * 连接超时时间
      */
-    @Value("${leyou.pay.connectTimeoutMs}")
+    @Value("${jialegou.pay.connectTimeoutMs}")
     private int connectTimeoutMs;
 
     /**
      * 读取超时时间
      */
-    @Value("${leyou.pay.connectTimeoutMs}")
+    @Value("${jialegou.pay.connectTimeoutMs}")
     private int readTimeoutMs;
 
     public String getAppId() {

@@ -1,8 +1,8 @@
 package com.hilkr.order.utils;
 
 import com.github.wxpay.sdk.WXPay;
-import com.leyou.order.config.PayConfig;
-import com.leyou.order.service.OrderService;
+import com.hilkr.order.config.PayConfig;
+import com.hilkr.order.service.OrderService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class PayHelper {
     }
 
     public String createPayUrl(Long orderId) {
-        String key = "leyou.pay.url." + orderId;
+        String key = "jialegou.pay.url." + orderId;
         try {
             String url = this.redisTemplate.opsForValue().get(key);
             if (StringUtils.isNotBlank(url)) {
@@ -62,7 +62,7 @@ public class PayHelper {
             //调用微信支付的终端IP（estore商城的IP）
             data.put("spbill_create_ip", "127.0.0.1");
             //回调地址
-            data.put("notify_url", "http://test.leyou.com/wxpay/notify");
+            data.put("notify_url", "http://test.jialegou.com/wxpay/notify");
             // 交易类型为扫码支付
             data.put("trade_type", "NATIVE");
             //商品id,使用假数据

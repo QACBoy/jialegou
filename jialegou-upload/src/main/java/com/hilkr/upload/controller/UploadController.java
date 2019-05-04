@@ -1,7 +1,9 @@
 package com.hilkr.upload.controller;
 
 import com.hilkr.upload.service.IUploadService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +34,12 @@ public class UploadController {
      */
     @PostMapping("image")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(uploadService.uploadImage(file));
+        String url= this.uploadService.uploadImage(file);
+        if(StringUtils.isBlank(url)){
+            //url为空，证明上传失败
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.ok(url);
     }
 }
 

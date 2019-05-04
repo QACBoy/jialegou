@@ -1,7 +1,7 @@
 package com.hilkr.order.config;
 
-import com.leyou.order.properties.IdWorkerProperties;
-import com.leyou.utils.IdWorker;
+import com.hilkr.common.utils.IdWorker;
+import com.hilkr.order.properties.IdWorkerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

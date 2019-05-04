@@ -1,8 +1,8 @@
 package com.hilkr.order.service;
 
-import com.leyou.common.pojo.PageResult;
-import com.leyou.order.pojo.Order;
-import com.leyou.order.pojo.OrderStatus;
+import com.hilkr.common.vo.PageResult;
+import com.hilkr.dal.model.Order;
+import com.hilkr.dal.model.OrderStatus;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import java.util.List;
 public interface OrderService {
     /**
      * 订单创建
+     *
      * @param order
      * @return
      */
@@ -21,6 +22,7 @@ public interface OrderService {
 
     /**
      * 根据订单号查询订单
+     *
      * @param id
      * @return
      */
@@ -28,6 +30,7 @@ public interface OrderService {
 
     /**
      * 分页查询用户订单
+     *
      * @param page
      * @param rows
      * @param status
@@ -37,6 +40,7 @@ public interface OrderService {
 
     /**
      * 更改订单状态
+     *
      * @param id
      * @param status
      * @return
@@ -45,6 +49,7 @@ public interface OrderService {
 
     /**
      * 根据订单号查询商品id
+     *
      * @param id
      * @return
      */
@@ -52,6 +57,7 @@ public interface OrderService {
 
     /**
      * 根据订单号查询订单状态
+     *
      * @param id
      * @return
      */
@@ -59,6 +65,7 @@ public interface OrderService {
 
     /**
      * 查询库存
+     *
      * @param order
      * @return
      */

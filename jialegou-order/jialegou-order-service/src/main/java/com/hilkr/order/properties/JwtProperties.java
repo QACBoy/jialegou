@@ -1,6 +1,6 @@
 package com.hilkr.order.properties;
 
-import com.leyou.auth.utils.RsaUtils;
+import com.hilkr.auth.utils.RsaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import java.security.PublicKey;
  * @author: 9805
  * @create: 2018-10-27
  **/
-//@ConfigurationProperties(prefix = "leyou.jwt")
+//@ConfigurationProperties(prefix = "jialegou.jwt")
 @Configuration
 @RefreshScope
 public class JwtProperties {
@@ -22,7 +22,7 @@ public class JwtProperties {
     /**
      * 公钥地址
      */
-    @Value("${leyou.jwt.pubKeyPath}")
+    @Value("${jialegou.jwt.pubKeyPath}")
     private String pubKeyPath;
 
     /**
@@ -30,13 +30,13 @@ public class JwtProperties {
      */
     private PublicKey publicKey;
 
-    @Value("${leyou.jwt.cookieName}")
+    @Value("${jialegou.jwt.cookieName}")
     private String cookieName;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProperties.class);
 
     @PostConstruct
-    public void init(){
+    public void init() {
         try {
             // 获取公钥和私钥
             this.publicKey = RsaUtils.getPublicKey(pubKeyPath);

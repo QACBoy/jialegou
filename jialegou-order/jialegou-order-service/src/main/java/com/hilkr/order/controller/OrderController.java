@@ -1,16 +1,17 @@
 package com.hilkr.order.controller;
 
-import com.leyou.common.pojo.PageResult;
-import com.leyou.order.pojo.Order;
-import com.leyou.order.pojo.OrderStatus;
-import com.leyou.order.service.OrderService;
-import com.leyou.order.utils.PayHelper;
-import com.leyou.order.utils.PayState;
+import com.hilkr.common.vo.PageResult;
+import com.hilkr.dal.model.Order;
+import com.hilkr.dal.model.OrderStatus;
+import com.hilkr.order.service.OrderService;
+import com.hilkr.order.utils.PayHelper;
+import com.hilkr.order.utils.PayState;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Arrays;

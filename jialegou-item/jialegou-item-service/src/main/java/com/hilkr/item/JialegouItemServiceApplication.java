@@ -16,7 +16,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @date 2019/3/3
  *
  */
-@EnableDiscoveryClient
+// @EnableDiscoveryClient
 @SpringBootApplication
 // TODO: 无效配置 org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.hilkr.dal.dao.StockMapper.insertList
 public class JialegouItemServiceApplication extends BaseApplication {

@@ -1,6 +1,6 @@
 package com.hilkr.order.client;
 
-import com.leyou.item.api.GoodsApi;
+import com.hilkr.item.api.GoodsApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**

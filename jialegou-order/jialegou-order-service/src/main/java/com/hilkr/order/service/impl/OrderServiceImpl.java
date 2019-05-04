@@ -1,27 +1,27 @@
 package com.hilkr.order.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.leyou.auth.entity.UserInfo;
-import com.leyou.common.pojo.PageResult;
-import com.leyou.item.pojo.Stock;
-import com.leyou.order.client.GoodsClient;
-import com.leyou.order.interceptor.LoginInterceptor;
-import com.leyou.order.mapper.*;
-import com.leyou.order.pojo.Order;
-import com.leyou.order.pojo.OrderDetail;
-import com.leyou.order.pojo.OrderStatus;
-import com.leyou.order.service.OrderService;
-import com.leyou.order.service.OrderStatusService;
-import com.leyou.order.vo.OrderStatusMessage;
-import com.leyou.utils.IdWorker;
+import com.hilkr.auth.entity.UserInfo;
+import com.hilkr.common.utils.IdWorker;
+import com.hilkr.common.vo.PageResult;
+import com.hilkr.dal.dao.*;
+import com.hilkr.dal.model.Order;
+import com.hilkr.dal.model.OrderDetail;
+import com.hilkr.dal.model.OrderStatus;
+import com.hilkr.dal.model.Stock;
+import com.hilkr.order.client.GoodsClient;
+import com.hilkr.order.interceptor.LoginInterceptor;
+import com.hilkr.order.service.OrderService;
+import com.hilkr.order.service.OrderStatusService;
+import com.hilkr.order.vo.OrderStatusMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -107,6 +107,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 根据订单号查询订单
+     *
      * @param id
      * @return
      */
@@ -115,9 +116,7 @@ public class OrderServiceImpl implements OrderService {
         //1.查询订单
         Order order = this.orderMapper.selectByPrimaryKey(id);
         //2.查询订单详情
-        Example example = new Example(OrderDetail.class);
-        example.createCriteria().andEqualTo("orderId",id);
-        List<OrderDetail> orderDetail = this.orderDetailMapper.selectByExample(example);
+        List<OrderDetail> orderDetail = this.orderDetailMapper.selectList(new QueryWrapper<OrderDetail>().eq("order_id", id));
         orderDetail.forEach(System.out::println);
         //3.查询订单状态
         OrderStatus orderStatus = this.orderStatusMapper.selectByPrimaryKey(order.getOrderId());
@@ -131,6 +130,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 查询当前登录用户的订单，通过订单状态进行筛选
+     *
      * @param page
      * @param rows
      * @param status
@@ -138,9 +138,9 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public PageResult<Order> queryUserOrderList(Integer page, Integer rows, Integer status) {
-        try{
+        try {
             //1.分页
-            PageHelper.startPage(page,rows);
+            PageHelper.startPage(page, rows);
             //2.获取登录用户
             UserInfo userInfo = LoginInterceptor.getLoginUser();
             //3.查询
@@ -148,20 +148,19 @@ public class OrderServiceImpl implements OrderService {
             //4.填充orderDetail
             List<Order> orderList = pageInfo.getResult();
             orderList.forEach(order -> {
-                Example example = new Example(OrderDetail.class);
-                example.createCriteria().andEqualTo("orderId",order.getOrderId());
-                List<OrderDetail> orderDetailList = this.orderDetailMapper.selectByExample(example);
+                List<OrderDetail> orderDetailList = this.orderDetailMapper.selectList(new QueryWrapper<OrderDetail>().eq("order_id", order.getOrderId()));
                 order.setOrderDetails(orderDetailList);
             });
-            return new PageResult<>(pageInfo.getTotal(),(long)pageInfo.getPages(), orderList);
-        }catch (Exception e){
-            logger.error("查询订单出错",e);
+            return new PageResult<>(pageInfo.getTotal(), (long) pageInfo.getPages(), orderList);
+        } catch (Exception e) {
+            logger.error("查询订单出错", e);
             return null;
         }
     }
 
     /**
      * 更新订单状态
+     *
      * @param id
      * @param status
      * @return
@@ -176,10 +175,10 @@ public class OrderServiceImpl implements OrderService {
         orderStatus.setStatus(status);
 
         //延时消息
-        OrderStatusMessage orderStatusMessage = new OrderStatusMessage(id,userInfo.getId(),userInfo.getUsername(),spuId,1);
-        OrderStatusMessage orderStatusMessage2 = new OrderStatusMessage(id,userInfo.getId(),userInfo.getUsername(),spuId,2);
+        OrderStatusMessage orderStatusMessage = new OrderStatusMessage(id, userInfo.getId(), userInfo.getUsername(), spuId, 1);
+        OrderStatusMessage orderStatusMessage2 = new OrderStatusMessage(id, userInfo.getId(), userInfo.getUsername(), spuId, 2);
         //1.根据状态判断要修改的时间
-        switch (status){
+        switch (status) {
             case 2:
                 //2.付款时间
                 orderStatus.setPaymentTime(new Date());
@@ -205,8 +204,8 @@ public class OrderServiceImpl implements OrderService {
                 orderStatus.setCommentTime(new Date());
                 break;
 
-                default:
-                    return null;
+            default:
+                return null;
         }
         int count = this.orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
         return count == 1;
@@ -214,14 +213,13 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 根据订单号查询商品id
+     *
      * @param id
      * @return
      */
     @Override
     public List<Long> querySkuIdByOrderId(Long id) {
-        Example example = new Example(OrderDetail.class);
-        example.createCriteria().andEqualTo("orderId",id);
-        List<OrderDetail> orderDetailList = this.orderDetailMapper.selectByExample(example);
+        List<OrderDetail> orderDetailList = this.orderDetailMapper.selectList(new QueryWrapper<OrderDetail>().eq("order_id", id));
         List<Long> ids = new ArrayList<>();
         orderDetailList.forEach(orderDetail -> ids.add(orderDetail.getSkuId()));
         return ids;
@@ -229,6 +227,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 根据订单号查询订单状态
+     *
      * @param id
      * @return
      */
@@ -239,6 +238,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 查询订单下商品的库存，返回库存不足的商品Id
+     *
      * @param order
      * @return
      */
@@ -247,7 +247,7 @@ public class OrderServiceImpl implements OrderService {
         List<Long> skuId = new ArrayList<>();
         order.getOrderDetails().forEach(orderDetail -> {
             Stock stock = this.stockMapper.selectByPrimaryKey(orderDetail.getSkuId());
-            if (stock.getStock() - orderDetail.getNum() < 0){
+            if (stock.getStock() - orderDetail.getNum() < 0) {
                 //先判断库存是否充足
                 skuId.add(orderDetail.getSkuId());
             }
@@ -257,16 +257,14 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 根据订单id查询其skuId
+     *
      * @param id
      * @return
      */
-    public Long findSkuIdByOrderId(Long id){
-        Example example = new Example(OrderDetail.class);
-        example.createCriteria().andEqualTo("orderId", id);
-        List<OrderDetail> orderDetail = this.orderDetailMapper.selectByExample(example);
+    public Long findSkuIdByOrderId(Long id) {
+        List<OrderDetail> orderDetail = this.orderDetailMapper.selectList(new QueryWrapper<OrderDetail>().eq("order_id", id));
         return orderDetail.get(0).getSkuId();
     }
-
 
 
 }

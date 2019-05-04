@@ -1,0 +1,56 @@
+server:
+  port: 8092
+  tomcat:
+    max-connections: 5000
+spring:
+  application:
+    name: comments-service
+  data:
+    mongodb:
+      host: 192.168.43.219
+      database: jialegoudb
+  datasource:
+    url: jdbc:mysql://localhost:3306/jialegou
+    username: tester
+    password: lkr.7664
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+  rabbitmq:
+    virtual-host: /jialegou
+    username: jialegou
+    password: jialegou
+    host: 192.168.43.219
+  redis:
+    host: 192.168.43.219
+  jackson:
+    default-property-inclusion: non_null # 配置json处理时忽略空值
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true  #当你获取host时，返回的不是主机名，而是ip
+    ip-address: 127.0.0.1
+    lease-expiration-duration-in-seconds: 10 #10秒不发送九过期
+    lease-renewal-interval-in-seconds: 5 #每隔5秒发一次心跳
+ribbon:
+  ConnectTimeout: 40000 # 连接超时时间(ms)
+  ReadTimeout: 20000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: true # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+jialegou:
+  jwt:
+    cookieName: JIALEGOU_TOKEN # cookie的名称
+    pubKeyPath: /Users/sam/Documents/Developer/swe15086/jialegou/jialegou-auth/src/main/resources/key/rsa.pub # 公钥地址
+  worker:
+    workerId: 2
+    dataCenterId: 2
+mybatis-plus:
+  typeAliasesPackage: com.hilkr
+  mapper-locations: classpath:/com/hilkr/dal/mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true

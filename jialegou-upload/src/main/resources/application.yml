@@ -3,16 +3,24 @@ server:
 spring:
   application:
     name: upload-service
+  rabbitmq:
+    virtual-host: /jialegou
+    username: jialegou
+    password: jialegou
+    host: 192.168.43.219
   servlet:
     multipart:
-      max-file-size: 5MB
+      max-file-size: 10MB
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
   instance:
+    lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
+    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
     prefer-ip-address: true
     ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port}
 jialegou:
   upload:
     allowTypes:
@@ -21,7 +29,7 @@ jialegou:
       - image/bmp
     baseUrl: http://image.jialegou.com/
 fdfs:
-  connect-timeout: 800
+  connect-timeout: 1000
   so-timeout: 2500
   thumb-image:
     height: 60

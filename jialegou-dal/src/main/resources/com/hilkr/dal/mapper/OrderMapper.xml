@@ -3,15 +3,15 @@
 <mapper namespace="com.hilkr.dal.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.hilkr.dal.model.Order">
     <id column="order_id" jdbcType="BIGINT" property="orderId" />
-    <result column="total_pay" jdbcType="BIGINT" property="totalPay" />
-    <result column="actual_pay" jdbcType="BIGINT" property="actualPay" />
+    <result column="total_pay" jdbcType="DOUBLE" property="totalPay" />
+    <result column="actual_pay" jdbcType="DOUBLE" property="actualPay" />
     <result column="promotion_ids" jdbcType="VARCHAR" property="promotionIds" />
-    <result column="payment_type" jdbcType="BIT" property="paymentType" />
+    <result column="payment_type" jdbcType="INTEGER" property="paymentType" />
     <result column="post_fee" jdbcType="BIGINT" property="postFee" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="shipping_name" jdbcType="VARCHAR" property="shippingName" />
     <result column="shipping_code" jdbcType="VARCHAR" property="shippingCode" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="buyer_message" jdbcType="VARCHAR" property="buyerMessage" />
     <result column="buyer_nick" jdbcType="VARCHAR" property="buyerNick" />
     <result column="buyer_rate" jdbcType="BIT" property="buyerRate" />
@@ -31,11 +31,24 @@
     receiver_city, receiver_district, receiver_address, receiver_mobile, receiver_zip, 
     receiver, invoice_type, source_type
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <resultMap id="OrderWithDetail" type="com.hilkr.dal.model.Order" autoMapping="true">
+    <id column="order_id" property="orderId"></id>
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="OrderWithDetail">
     select 
     <include refid="Base_Column_List" />
     from order
     where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <select id="queryOrderList" resultMap="BaseResultMap">
+    SELECT o.order_id,o.actual_pay, o.total_pay,o.create_time, os.status
+    FROM order o
+    LEFT JOIN order_status os ON os.order_id = o.order_id
+    WHERE o.user_id = #{userId}
+    <if test="status != null and status != 0">
+      AND os.status = #{status}
+    </if>
+    ORDER BY o.create_time DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from order
@@ -50,10 +63,10 @@
       receiver_district, receiver_address, receiver_mobile, 
       receiver_zip, receiver, invoice_type, 
       source_type)
-    values (#{orderId,jdbcType=BIGINT}, #{totalPay,jdbcType=BIGINT}, #{actualPay,jdbcType=BIGINT}, 
-      #{promotionIds,jdbcType=VARCHAR}, #{paymentType,jdbcType=BIT}, #{postFee,jdbcType=BIGINT}, 
+    values (#{orderId,jdbcType=BIGINT}, #{totalPay,jdbcType=DOUBLE}, #{actualPay,jdbcType=DOUBLE},
+      #{promotionIds,jdbcType=VARCHAR}, #{paymentType,jdbcType=INTEGER}, #{postFee,jdbcType=BIGINT},
       #{createTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerNick,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerNick,jdbcType=VARCHAR},
       #{buyerRate,jdbcType=BIT}, #{receiverState,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR}, 
       #{receiverDistrict,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR}, 
       #{receiverZip,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, #{invoiceType,jdbcType=INTEGER}, 
@@ -134,16 +147,16 @@
         #{orderId,jdbcType=BIGINT},
       </if>
       <if test="totalPay != null">
-        #{totalPay,jdbcType=BIGINT},
+        #{totalPay,jdbcType=DOUBLE},
       </if>
       <if test="actualPay != null">
-        #{actualPay,jdbcType=BIGINT},
+        #{actualPay,jdbcType=DOUBLE},
       </if>
       <if test="promotionIds != null">
         #{promotionIds,jdbcType=VARCHAR},
       </if>
       <if test="paymentType != null">
-        #{paymentType,jdbcType=BIT},
+        #{paymentType,jdbcType=INTEGER},
       </if>
       <if test="postFee != null">
         #{postFee,jdbcType=BIGINT},
@@ -158,7 +171,7 @@
         #{shippingCode,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="buyerMessage != null">
         #{buyerMessage,jdbcType=VARCHAR},
@@ -202,16 +215,16 @@
     update order
     <set>
       <if test="totalPay != null">
-        total_pay = #{totalPay,jdbcType=BIGINT},
+        total_pay = #{totalPay,jdbcType=DOUBLE},
       </if>
       <if test="actualPay != null">
-        actual_pay = #{actualPay,jdbcType=BIGINT},
+        actual_pay = #{actualPay,jdbcType=DOUBLE},
       </if>
       <if test="promotionIds != null">
         promotion_ids = #{promotionIds,jdbcType=VARCHAR},
       </if>
       <if test="paymentType != null">
-        payment_type = #{paymentType,jdbcType=BIT},
+        payment_type = #{paymentType,jdbcType=INTEGER},
       </if>
       <if test="postFee != null">
         post_fee = #{postFee,jdbcType=BIGINT},
@@ -226,7 +239,7 @@
         shipping_code = #{shippingCode,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="buyerMessage != null">
         buyer_message = #{buyerMessage,jdbcType=VARCHAR},
@@ -269,15 +282,15 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hilkr.dal.model.Order">
     update order
-    set total_pay = #{totalPay,jdbcType=BIGINT},
-      actual_pay = #{actualPay,jdbcType=BIGINT},
+    set total_pay = #{totalPay,jdbcType=DOUBLE},
+      actual_pay = #{actualPay,jdbcType=DOUBLE},
       promotion_ids = #{promotionIds,jdbcType=VARCHAR},
-      payment_type = #{paymentType,jdbcType=BIT},
+      payment_type = #{paymentType,jdbcType=INTEGER},
       post_fee = #{postFee,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       shipping_name = #{shippingName,jdbcType=VARCHAR},
       shipping_code = #{shippingCode,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
       buyer_message = #{buyerMessage,jdbcType=VARCHAR},
       buyer_nick = #{buyerNick,jdbcType=VARCHAR},
       buyer_rate = #{buyerRate,jdbcType=BIT},

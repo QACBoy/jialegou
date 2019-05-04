@@ -9,7 +9,6 @@ import com.hilkr.upload.service.IUploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,31 +36,39 @@ public class UploadServiceImpl implements IUploadService {
 
     @Override
     public String uploadImage(MultipartFile file) {
-        //对文件进行校验
-        //对文件格式进行校验
-        String contentType = file.getContentType();
-        if (!prop.getAllowTypes().contains(contentType)) {
-            throw new JialegouException(ExceptionEnum.INVALID_FILE_FORMAT);
-        }
-        //检验文件内容
+        /**
+         * 1.图片信息校验
+         *      1)校验文件类型
+         *      2)校验图片内容
+         * 2.保存图片
+         *      1)生成保存目录
+         *      2)保存图片
+         *      3)拼接图片地址
+         */
         try {
-            BufferedImage image = ImageIO.read(file.getInputStream());
-            if (image == null) {
-                log.info("【 文件上传 】上传文件格式错误");
+            String type = file.getContentType();
+            if (!prop.getAllowTypes().contains(type)) {
+                log.info("上传文件失败，文件类型不匹配：{}", type);
                 throw new JialegouException(ExceptionEnum.INVALID_FILE_FORMAT);
             }
-        } catch (IOException e) {
-            log.info("【 文件上传 】文件上传失败", e);
-            throw new JialegouException(ExceptionEnum.INVALID_FILE_FORMAT);
-        }
-        //保存图片
-        try {
-            String extensionName = StringUtils.substringAfterLast(file.getOriginalFilename(), ".");
-            StorePath storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(), extensionName, null);
+            BufferedImage image = ImageIO.read(file.getInputStream());
+            if (image == null) {
+                log.info("上传失败，文件内容不符合要求");
+                throw new JialegouException(ExceptionEnum.INVALID_FILE_FORMAT);
+            }
+
+            StorePath storePath = this.storageClient.uploadFile(
+                    file.getInputStream(), file.getSize(), getExtension(file.getOriginalFilename()), null);
             //返回保存图片的完整url
-            return prop.getBaseUrl() + storePath.getFullPath();
+            String url = prop.getBaseUrl() + storePath.getFullPath();
+            return url;
         } catch (IOException e) {
             throw new JialegouException(ExceptionEnum.UPLOAD_IMAGE_EXCEPTION);
         }
     }
+
+    public String getExtension(String fileName) {
+        return StringUtils.substringAfterLast(fileName, ".");
+    }
 }
+

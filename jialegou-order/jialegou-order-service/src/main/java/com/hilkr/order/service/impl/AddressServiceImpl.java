@@ -1,13 +1,13 @@
 package com.hilkr.order.service.impl;
 
-import com.leyou.auth.entity.UserInfo;
-import com.leyou.order.interceptor.LoginInterceptor;
-import com.leyou.order.mapper.AddressMapper;
-import com.leyou.order.pojo.Address;
-import com.leyou.order.service.AddressService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hilkr.auth.entity.UserInfo;
+import com.hilkr.dal.dao.AddressMapper;
+import com.hilkr.dal.model.Address;
+import com.hilkr.order.interceptor.LoginInterceptor;
+import com.hilkr.order.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -25,9 +25,10 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void deleteAddress(Long addressId) {
         UserInfo userInfo = LoginInterceptor.getLoginUser();
-        Example example = new Example(Address.class);
-        example.createCriteria().andEqualTo("userId",userInfo.getId()).andEqualTo("id",addressId);
-        this.addressMapper.deleteByExample(example);
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userInfo.getId())
+                .eq("id", addressId);
+        this.addressMapper.delete(queryWrapper);
     }
 
     @Override
@@ -42,9 +43,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public List<Address> queryAddressByUserId() {
         UserInfo userInfo = LoginInterceptor.getLoginUser();
-        Example example = new Example(Address.class);
-        example.createCriteria().andEqualTo("userId",userInfo.getId());
-        return this.addressMapper.selectByExample(example);
+        return this.addressMapper.selectList(new QueryWrapper<Address>().eq("user_id", userInfo.getId()));
     }
 
     @Override
@@ -58,21 +57,22 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address queryAddressById(Long addressId) {
         UserInfo userInfo = LoginInterceptor.getLoginUser();
-        Example example = new Example(Address.class);
-        example.createCriteria().andEqualTo("id",addressId).andEqualTo("userId",userInfo.getId());
-        return this.addressMapper.selectByExample(example).get(0);
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", addressId)
+                .eq("user_id", userInfo.getId());
+        return this.addressMapper.selectList(queryWrapper).get(0);
     }
 
-    public void setDefaultAddress(Address address){
-        if (address.getDefaultAddress()){
+    public void setDefaultAddress(Address address) {
+        if (address.getDefaultAddress()) {
             //如果将本地址设置为默认地址，那么该用户下的其他地址都应该是非默认地址
             List<Address> addressList = this.queryAddressByUserId();
             addressList.forEach(addressTemp -> {
-                if (addressTemp.getDefaultAddress()){
+                if (addressTemp.getDefaultAddress()) {
                     addressTemp.setDefaultAddress(false);
                     this.addressMapper.updateByPrimaryKeySelective(addressTemp);
                 }
-            } );
+            });
         }
     }
 }

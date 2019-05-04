@@ -3,10 +3,15 @@ package com.hilkr.item.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hilkr.common.parameter.pojo.SpuQueryByPageParameter;
 import com.hilkr.common.vo.PageResult;
+import com.hilkr.dal.model.SeckillSku;
 import com.hilkr.dal.model.Sku;
 import com.hilkr.dal.model.SpuDetail;
 import com.hilkr.dal.model.Stock;
+import com.hilkr.item.bo.SeckillParameter;
 import com.hilkr.item.bo.SpuBo;
+
+import java.text.ParseException;
+
 
 import java.util.List;
 
@@ -97,15 +102,17 @@ public interface IGoodsService extends IService<Stock> {
 
     /**
      * 查询秒杀商品
+     *
      * @return
      */
-    // List<SeckillGoods> querySeckillGoods();
+    List<SeckillSku> querySeckillGoods();
 
     /**
      * 添加秒杀商品
+     *
      * @param seckillParameter
      */
-    // void addSeckillGoods(SeckillParameter seckillParameter) throws ParseException;
+    void addSeckillGoods(SeckillParameter seckillParameter) throws ParseException;
     // PageResult<Spu> querySpuByPage(Integer page, Integer rows, String key, Boolean saleable);
     //
     // SpuDetail querySpuDetailBySpuId(Long spuId);

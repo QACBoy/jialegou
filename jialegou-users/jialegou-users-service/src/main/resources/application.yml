@@ -52,7 +52,7 @@ mybatis-plus:
   typeAliasesPackage: com.hilkr
   mapper-locations: classpath:/com/hilkr/dal/mapper/*Mapper.xml
   configuration:
-      map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: true
 #mybatis
 #mybatis-plus:
 #  mapper-locations: classpath:/mapper/*Mapper.xml

@@ -8,7 +8,7 @@
     <result column="num" jdbcType="INTEGER" property="num" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="own_spec" jdbcType="VARCHAR" property="ownSpec" />
-    <result column="price" jdbcType="BIGINT" property="price" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -30,7 +30,23 @@
       price, image)
     values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
       #{num,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{ownSpec,jdbcType=VARCHAR}, 
-      #{price,jdbcType=BIGINT}, #{image,jdbcType=VARCHAR})
+      #{price,jdbcType=DOUBLE}, #{image,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertList" parameterType="com.hilkr.dal.model.OrderDetail">
+    insert into order_detail (id, order_id, sku_id,
+      num, title, own_spec,
+      price, image)
+    values 
+    <foreach collection="orderDetails" item="orderDetail" separator="," open="(" close=")">
+      (#{orderDetail.id,jdbcType=BIGINT},
+      #{orderDetail.orderId,jdbcType=BIGINT},
+      #{orderDetail.skuId,jdbcType=BIGINT},
+      #{orderDetail.num,jdbcType=INTEGER},
+      #{orderDetail.title,jdbcType=VARCHAR},
+      #{orderDetail.ownSpec,jdbcType=VARCHAR},
+      #{orderDetail.price,jdbcType=DOUBLE},
+      #{orderDetail.image,jdbcType=VARCHAR})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.hilkr.dal.model.OrderDetail">
     insert into order_detail
@@ -80,7 +96,7 @@
         #{ownSpec,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=BIGINT},
+        #{price,jdbcType=DOUBLE},
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
@@ -106,7 +122,7 @@
         own_spec = #{ownSpec,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=BIGINT},
+        price = #{price,jdbcType=DOUBLE},
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
@@ -121,7 +137,7 @@
       num = #{num,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       own_spec = #{ownSpec,jdbcType=VARCHAR},
-      price = #{price,jdbcType=BIGINT},
+      price = #{price,jdbcType=DOUBLE},
       image = #{image,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

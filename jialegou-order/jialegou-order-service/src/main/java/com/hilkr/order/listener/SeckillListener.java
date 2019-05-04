@@ -1,17 +1,13 @@
 package com.hilkr.order.listener;
 
-import com.leyou.auth.entity.UserInfo;
-import com.leyou.item.pojo.SeckillGoods;
-import com.leyou.item.pojo.Stock;
-import com.leyou.order.mapper.*;
-import com.leyou.order.pojo.Order;
-import com.leyou.order.pojo.OrderDetail;
-import com.leyou.order.pojo.OrderStatus;
-import com.leyou.order.pojo.SeckillOrder;
-import com.leyou.order.service.OrderService;
-import com.leyou.seckill.vo.SeckillMessage;
-import com.leyou.utils.IdWorker;
-import com.leyou.utils.JsonUtils;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hilkr.auth.entity.UserInfo;
+import com.hilkr.common.utils.IdWorker;
+import com.hilkr.common.utils.JsonUtils;
+import com.hilkr.dal.dao.*;
+import com.hilkr.dal.model.*;
+import com.hilkr.order.service.OrderService;
+import com.hilkr.seckill.vo.SeckillMessage;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -20,7 +16,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -59,38 +54,37 @@ public class SeckillListener {
     private OrderDetailMapper orderDetailMapper;
 
     @Autowired
-    private SeckillMapper seckillMapper;
+    private SeckillSkuMapper seckillMapper;
 
     /**
      * 接收秒杀信息
+     *
      * @param seck
      */
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = "leyou.order.seckill.queue",durable = "true"), //队列持久化
+            value = @Queue(value = "jialegou.order.seckill.queue", durable = "true"), //队列持久化
             exchange = @Exchange(
-                    value = "leyou.order.exchange",
+                    value = "jialegou.order.exchange",
                     ignoreDeclarationExceptions = "true",
                     type = ExchangeTypes.TOPIC
             ),
             key = {"order.seckill"}
     ))
     @Transactional(rollbackFor = Exception.class)
-    public void listenSeckill(String seck){
+    public void listenSeckill(String seck) {
 
-        SeckillMessage seckillMessage = JsonUtils.parse(seck,SeckillMessage.class);
+        SeckillMessage seckillMessage = JsonUtils.parse(seck, SeckillMessage.class);
         UserInfo userInfo = seckillMessage.getUserInfo();
-        SeckillGoods seckillGoods = seckillMessage.getSeckillGoods();
+        SeckillSku seckillGoods = seckillMessage.getSeckillSku();
 
 
         //1.首先判断库存是否充足
         Stock stock = stockMapper.selectByPrimaryKey(seckillGoods.getSkuId());
-        if (stock.getSeckillStock() <= 0 || stock.getStock() <= 0){
+        if (stock.getSeckillStock() <= 0 || stock.getStock() <= 0) {
             //如果库存不足的话修改秒杀商品的enable字段
-            Example example = new Example(SeckillGoods.class);
-            example.createCriteria().andEqualTo("skuId", seckillGoods.getSkuId());
-            List<SeckillGoods> list = this.seckillMapper.selectByExample(example);
-            for (SeckillGoods temp : list){
-                if (temp.getEnable()){
+            List<SeckillSku> list = this.seckillMapper.selectList(new QueryWrapper<SeckillSku>().eq("sku_id", seckillGoods.getSkuId()));
+            for (SeckillSku temp : list) {
+                if (temp.getEnable()) {
                     temp.setEnable(false);
                     this.seckillMapper.updateByPrimaryKeySelective(temp);
                 }
@@ -98,10 +92,11 @@ public class SeckillListener {
             return;
         }
         //2.判断此用户是否已经秒杀到了
-        Example example = new Example(SeckillOrder.class);
-        example.createCriteria().andEqualTo("userId",userInfo.getId()).andEqualTo("skuId",seckillGoods.getSkuId());
-        List<SeckillOrder> list = this.seckillOrderMapper.selectByExample(example);
-        if (list.size() > 0){
+        QueryWrapper<SeckillOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userInfo.getId())
+                .eq("sku_id", seckillGoods.getSkuId());
+        List<SeckillOrder> list = this.seckillOrderMapper.selectList(queryWrapper);
+        if (list.size() > 0) {
             return;
         }
         //3.下订单
@@ -110,12 +105,13 @@ public class SeckillListener {
         order.setPaymentType(1);
         order.setTotalPay(seckillGoods.getSeckillPrice());
         order.setActualPay(seckillGoods.getSeckillPrice());
-        order.setPostFee(0+"");
-        order.setReceiver("李四");
-        order.setReceiverMobile("15812312312");
-        order.setReceiverCity("西安");
-        order.setReceiverDistrict("碑林区");
-        order.setReceiverState("陕西");
+        // TODO order.setPostFee(0 + "");
+        order.setPostFee(0L);
+        order.setReceiver("张三");
+        order.setReceiverMobile("13012312312");
+        order.setReceiverCity("厦门");
+        order.setReceiverDistrict("湖里区");
+        order.setReceiverState("福建");
         order.setReceiverZip("000000000");
         order.setInvoiceType(0);
         order.setSourceType(2);

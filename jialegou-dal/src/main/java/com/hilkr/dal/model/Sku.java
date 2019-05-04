@@ -10,7 +10,6 @@ public class Sku {
 
     private Long id;
 
-    @TableField(value = "spu_id")
     private Long spuId;
 
     private String title;
