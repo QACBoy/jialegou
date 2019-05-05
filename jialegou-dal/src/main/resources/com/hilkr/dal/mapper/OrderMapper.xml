@@ -26,7 +26,7 @@
     <result column="source_type" jdbcType="INTEGER" property="sourceType" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_id, total_pay, actual_pay, promotion_ids, payment_type, post_fee, create_time, 
+    order_id, total_pay, actual_pay, promotion_ids, payment_type, post_fee, create_time,
     shipping_name, shipping_code, user_id, buyer_message, buyer_nick, buyer_rate, receiver_state, 
     receiver_city, receiver_district, receiver_address, receiver_mobile, receiver_zip, 
     receiver, invoice_type, source_type
@@ -37,12 +37,12 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="OrderWithDetail">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where order_id = #{orderId,jdbcType=BIGINT}
   </select>
   <select id="queryOrderList" resultMap="BaseResultMap">
     SELECT o.order_id,o.actual_pay, o.total_pay,o.create_time, os.status
-    FROM order o
+    FROM `order` o
     LEFT JOIN order_status os ON os.order_id = o.order_id
     WHERE o.user_id = #{userId}
     <if test="status != null and status != 0">
@@ -51,11 +51,11 @@
     ORDER BY o.create_time DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from order
+    delete from `order`
     where order_id = #{orderId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.hilkr.dal.model.Order">
-    insert into order (order_id, total_pay, actual_pay, 
+    insert into `order` (order_id, total_pay, actual_pay,
       promotion_ids, payment_type, post_fee, 
       create_time, shipping_name, shipping_code, 
       user_id, buyer_message, buyer_nick, 
@@ -73,7 +73,7 @@
       #{sourceType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hilkr.dal.model.Order">
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
         order_id,
@@ -212,7 +212,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.hilkr.dal.model.Order">
-    update order
+    update `order`
     <set>
       <if test="totalPay != null">
         total_pay = #{totalPay,jdbcType=DOUBLE},
@@ -281,7 +281,7 @@
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hilkr.dal.model.Order">
-    update order
+    update `order`
     set total_pay = #{totalPay,jdbcType=DOUBLE},
       actual_pay = #{actualPay,jdbcType=DOUBLE},
       promotion_ids = #{promotionIds,jdbcType=VARCHAR},

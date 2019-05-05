@@ -4,7 +4,7 @@ package com.hilkr.order.utils;
  * @author: HuYi.Zhang
  * @create: 2018-06-07 17:44
  **/
-public enum PayState {
+public enum PayState1 {
     /**
      * 未支付0
      * 支付成功1
@@ -12,7 +12,7 @@ public enum PayState {
      */
     NOT_PAY(0),SUCCESS(1),FAIL(2);
 
-    PayState(int value) {
+    PayState1(int value) {
         this.value = value;
     }
 

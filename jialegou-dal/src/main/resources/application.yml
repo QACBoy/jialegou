@@ -1,8 +1,8 @@
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/jialegou
-    username: tester
-    password: lkr.7664
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/jialegou
+#    username: tester
+#    password: lkr.7664
 mybatis-plus:
   typeAliasesPackage: com.hilkr
   mapper-locations: classpath:/com/hilkr/dal/mapper/*Mapper.xml

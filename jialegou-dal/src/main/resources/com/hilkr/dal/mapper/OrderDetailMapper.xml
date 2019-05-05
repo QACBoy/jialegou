@@ -37,7 +37,7 @@
       num, title, own_spec,
       price, image)
     values 
-    <foreach collection="orderDetails" item="orderDetail" separator="," open="(" close=")">
+    <foreach collection="orderDetails" item="orderDetail" separator="," >
       (#{orderDetail.id,jdbcType=BIGINT},
       #{orderDetail.orderId,jdbcType=BIGINT},
       #{orderDetail.skuId,jdbcType=BIGINT},

@@ -20,7 +20,8 @@
         <module name="jialegou-order-interface" />
         <module name="jialegou-order-service" />
         <module name="jialegou-page" />
-        <module name="jialegou-payment" />
+        <module name="jialegou-payment-interface" />
+        <module name="jialegou-payment-service" />
         <module name="jialegou-registry" />
         <module name="jialegou-search" />
         <module name="jialegou-seckill-interface" />

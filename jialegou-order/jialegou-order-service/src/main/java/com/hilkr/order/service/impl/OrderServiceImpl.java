@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderId(orderId);
         order.setUserId(userInfo.getId());
         //4.保存数据
-        this.orderMapper.insertSelective(order);
+        orderMapper.insertSelective(order);
 
         //5.保存订单状态
         OrderStatus orderStatus = new OrderStatus();

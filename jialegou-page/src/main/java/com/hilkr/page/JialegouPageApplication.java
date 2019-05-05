@@ -12,9 +12,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @author sam
  * @create 2019-04-10
  */
-@SpringBootApplication
-@EnableDiscoveryClient
 @EnableFeignClients
+@EnableDiscoveryClient
+@SpringBootApplication
 public class JialegouPageApplication {
     public static void main(String[] args) {
         SpringApplication.run(JialegouPageApplication.class);

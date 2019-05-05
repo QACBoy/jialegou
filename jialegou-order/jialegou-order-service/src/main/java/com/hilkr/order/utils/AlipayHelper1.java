@@ -19,11 +19,11 @@ import java.util.concurrent.TimeUnit;
  * @create: 2018-10-27 15:54
  **/
 @Component
-public class PayHelper {
+public class AlipayHelper1 {
 
     private WXPay wxPay;
 
-    private static final Logger logger = LoggerFactory.getLogger(PayHelper.class);
+    private static final Logger logger = LoggerFactory.getLogger(AlipayHelper1.class);
 
     @Autowired
     private StringRedisTemplate redisTemplate;
@@ -31,7 +31,7 @@ public class PayHelper {
     @Autowired
     private OrderService orderService;
 
-    public PayHelper(PayConfig payConfig) {
+    public AlipayHelper1(PayConfig payConfig) {
         // 真实开发时
         wxPay = new WXPay(payConfig);
         // 测试时
@@ -95,7 +95,7 @@ public class PayHelper {
      * @param orderId
      * @return
      */
-    public PayState queryOrder(Long orderId) {
+    public PayState1 queryOrder(Long orderId) {
         Map<String, String> data = new HashMap<>();
         // 订单号
         data.put("out_trade_no", orderId.toString());
@@ -103,7 +103,7 @@ public class PayHelper {
             Map<String, String> result = this.wxPay.orderQuery(data);
             if (result == null) {
                 // 未查询到结果，认为是未付款
-                return PayState.NOT_PAY;
+                return PayState1.NOT_PAY;
             }
             String state = result.get("trade_state");
             if ("SUCCESS".equals(state)) {
@@ -111,17 +111,17 @@ public class PayHelper {
 
                 // 修改订单状态
                 this.orderService.updateOrderStatus(orderId, 2);
-                return PayState.SUCCESS;
+                return PayState1.SUCCESS;
             } else if (StringUtils.equals("USERPAYING", state) || StringUtils.equals("NOTPAY", state)) {
                 // 未付款或正在付款，都认为是未付款
-                return PayState.NOT_PAY;
+                return PayState1.NOT_PAY;
             } else {
                 // 其它状态认为是付款失败
-                return PayState.FAIL;
+                return PayState1.FAIL;
             }
         } catch (Exception e) {
             logger.error("查询订单状态异常", e);
-            return PayState.NOT_PAY;
+            return PayState1.NOT_PAY;
         }
     }
 }

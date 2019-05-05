@@ -3,6 +3,13 @@ server:
 spring:
   application:
     name: order-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/jialegou
+    username: tester
+    password: lkr.7664
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
   rabbitmq:
     host: 192.168.43.219
     username: jialegou
@@ -50,3 +57,8 @@ jialegou:
     key: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
     connectTimeoutMs: 5000
     readTimeoutMs: 10000
+mybatis-plus:
+  typeAliasesPackage: com.hilkr
+  mapper-locations: classpath:/com/hilkr/dal/mapper/*Mapper.xml
+  configuration:
+      map-underscore-to-camel-case: true

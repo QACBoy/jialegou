@@ -19,6 +19,8 @@
     <file url="file://$PROJECT_DIR$/jialegou-order/jialegou-order-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jialegou-page" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jialegou-payment" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jialegou-payment/jialegou-payment-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jialegou-payment/jialegou-payment-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jialegou-registry" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jialegou-search" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jialegou-seckill" charset="UTF-8" />

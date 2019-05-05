@@ -11,6 +11,7 @@ import com.hilkr.page.client.BrandClient;
 import com.hilkr.page.client.CategoryClient;
 import com.hilkr.page.client.GoodsClient;
 import com.hilkr.page.service.IGoodsService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.*;
  * Time: 2018-10-17 19:40
  * Feature:商品详情页信息
  */
+@Slf4j
 @Service
 public class GoodsServiceImpl implements IGoodsService {
 
@@ -137,9 +139,14 @@ public class GoodsServiceImpl implements IGoodsService {
                     if (e.getValue().equals(key)) {
                         specialParamName.put(e.getKey(), e.getValue());
                         //因为是放在数组里面，所以要先去除两个方括号，然后再以逗号分割成数组
-                        String s = specValue.get(e.getKey()).toString();
-                        String result = StringUtils.substring(s, 1, s.length() - 1);
-                        specialParamValue.put(e.getKey(), result.split(","));
+                        try {
+                            String s = specValue.get(e.getKey()).toString();
+                            String result = StringUtils.substring(s, 1, s.length() - 1);
+                            specialParamValue.put(e.getKey(), result.split(","));
+                        }catch (NullPointerException e1){
+                            log.info(" =============== 机身颜色为空！ =============== ");
+                            e1.printStackTrace();
+                        }
                     }
                 }
             }

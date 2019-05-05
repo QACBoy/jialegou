@@ -17,7 +17,7 @@ public class Order {
     @NotNull
     private Double actualPay;
 
-    @NotNull
+    // @NotNull
     private String promotionIds;
 
     private Integer paymentType;

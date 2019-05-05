@@ -6,8 +6,6 @@ import com.hilkr.dal.model.Address;
 public interface AddressMapper extends BaseMapper<Address> {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Address record);
-
     int insertSelective(Address record);
 
     Address selectByPrimaryKey(Long id);
