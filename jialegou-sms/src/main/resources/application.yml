@@ -10,7 +10,7 @@ spring:
     host: 192.168.43.219
 jialegou:
   sms:
-    accessKeyId: LTAIKcIj7vazhc5U
-    accessKeySecret: Vlv5JTjfJQehGTrZDdiyg7akZMljbv
+    accessKeyId:
+    accessKeySecret:
     signName: hilkr
     verifyCodeTemplate: SMS_164507246
