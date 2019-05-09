@@ -99,7 +99,7 @@ public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements
         //3.1 是否过滤上下架
         if (spuQueryByPageParameter.getSaleable() != null) {
             System.out.println(spuQueryByPageParameter.getSaleable());
-            queryWrapper.or();
+            // queryWrapper.or();
             queryWrapper.eq("saleable", spuQueryByPageParameter.getSaleable());
         }
         //3.3 是否排序
