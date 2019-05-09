@@ -9,11 +9,10 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 描述: <br>
+ * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-04-10
+ * @author hilkr
  */
 public class SearchResult<Goods> extends PageResult<Goods> {
 

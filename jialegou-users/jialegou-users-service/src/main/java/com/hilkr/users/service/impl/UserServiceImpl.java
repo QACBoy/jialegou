@@ -22,9 +22,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-21 18:42
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Service
 public class UserServiceImpl implements IUserService {

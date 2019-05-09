@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 描述: <br>
+ * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-04-10
+ * @author hilkr
  */
 @Component
 public class GoodsListener {

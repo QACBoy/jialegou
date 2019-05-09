@@ -165,7 +165,7 @@
                         <div class="summary-wrap">
                             <div class="fl title"><i>价　　格</i></div>
                             <div class="fl price">
-                                <i>¥</i><em>{{ly.formatPrice(sku.price)}}</em><span>降价通知</span>
+                                <i>¥</i><em>{{jlg.formatPrice(sku.price)}}</em><span>降价通知</span>
                             </div>
                             <div class="fr remark"><i>累计评价</i><em>612188</em></div>
                         </div>
@@ -620,7 +620,7 @@
     var itemVm = new Vue({
             el:"#itemApp",
             data:{
-                ly,
+                jlg,
                 skus,
                 specialParamName,
                 specialParamValue,
@@ -662,16 +662,16 @@
             }
         },
         addCart(){
-            ly.verifyUser().then(res => {
+            jlg.verifyUser().then(res => {
                 //已经登录发送消息到后台，保存到redis中
-                ly.http.post("/cart",{skuId:this.sku.id,num:this.num}).then(res => {
+                jlg.http.post("/cart",{skuId:this.sku.id,num:this.num}).then(res => {
 
                 window.location = "http://www.jialegou.com/cart.html";
         })
         }).catch(() =>{
                 //未登录保存在浏览器本地localStorage中
                 //1.查询本地购物车
-                let carts = ly.store.get("carts") || [];
+                let carts = jlg.store.get("carts") || [];
             let cart = carts.find(c => c.skuId === this.sku.id);
             //2.判断是否存在
             if (cart){
@@ -690,7 +690,7 @@
                 carts.push(cart);
             }
             //5.把carts写回到localStorage
-            ly.store.set("carts",carts);
+            jlg.store.set("carts",carts);
             //6.跳转
             window.location.href = "http://www.jialegou.com/cart.html";
         });

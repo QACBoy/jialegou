@@ -1,7 +1,9 @@
 package com.hilkr.payment.Alipay.service.impl;
 
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayResponse;
 import com.alipay.api.domain.TradeFundBill;
+import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.demo.trade.config.Configs;
@@ -17,6 +19,7 @@ import com.alipay.demo.trade.service.impl.AlipayMonitorServiceImpl;
 import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 import com.alipay.demo.trade.service.impl.AlipayTradeWithHBServiceImpl;
 import com.alipay.demo.trade.utils.Utils;
+import com.google.common.collect.Maps;
 import com.hilkr.payment.Alipay.enums.PayState;
 import com.hilkr.payment.Alipay.service.IAlipayService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,16 +29,18 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-05-05
+ * @author hilkr
  */
 @Slf4j
 @Service
@@ -51,6 +56,10 @@ public class AlipayServiceimpl implements IAlipayService {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+
+    private final String alipayStateBaseKey = "jialegou.pay.state.";
+    private final String alipayQRCodeBaseKey = "jialegou.pay.url.";
+
 
     @PostConstruct
     public void init() {
@@ -75,7 +84,7 @@ public class AlipayServiceimpl implements IAlipayService {
 
     @Override
     public String createPayUrl(Long orderId) {
-        String key = "jialegou.pay.url." + orderId;
+        String key = alipayQRCodeBaseKey + orderId;
         try {
             String url = this.redisTemplate.opsForValue().get(key);
             if (StringUtils.isNotBlank(url)) {
@@ -89,7 +98,8 @@ public class AlipayServiceimpl implements IAlipayService {
         // 需保证商户系统端不能重复，建议通过数据库sequence生成，
         // String outTradeNo = "tradeprecreate" + System.currentTimeMillis()
         //                     + (long) (Math.random() * 10000000L);
-        String outTradeNo = orderId.toString();
+        String outTradeNo = String.valueOf(orderId);
+        log.info("================ 000 outTradeNo =============" + outTradeNo);
 
         // (必填) 订单标题，粗略描述用户的支付目的。如“xxx品牌xxx门店当面付扫码消费”
         String subject = "嘉.乐购当面付扫码消费";
@@ -186,13 +196,29 @@ public class AlipayServiceimpl implements IAlipayService {
      * @param orderId
      * @return
      */
+    // @Override
+    // public PayState queryOrder(Long orderId) {
+    //
+    //     String key = alipayStateBaseKey + orderId;
+    //     try {
+    //         String alipayState = this.redisTemplate.opsForValue().get(key);
+    //         if (StringUtils.isNotBlank(alipayState)) {
+    //             log.info("查询返回该订单支付成功: )");
+    //         }
+    //     } catch (Exception e) {
+    //         log.error("查询缓存付款结果不存在，原因：未收到支付回调 \n 订单编号：{}", orderId, e);
+    //         return PayState.FAIL;
+    //     }
+    //     return PayState.SUCCESS;
+    // }
+    //
     @Override
     public PayState queryOrder(Long orderId) {
         // (必填) 商户订单号，通过此商户订单号查询当面付的交易状态
         // String outTradeNo = "tradepay14817938139942440181";
         String outTradeNo = String.valueOf(orderId);
         // 创建查询请求builder，设置请求参数
-
+        log.info("================ 111 outTradeNo =============" + outTradeNo);
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
                 .setOutTradeNo(outTradeNo);
 
@@ -217,6 +243,48 @@ public class AlipayServiceimpl implements IAlipayService {
             default:
                 log.error("其它状态，认为是付款失败");
                 return PayState.FAIL;
+        }
+    }
+
+    @Override
+    public void alipayCallback(HttpServletRequest request) {
+        Map<String, String> params = Maps.newHashMap();
+
+        Map requestParams = request.getParameterMap();
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+
+                valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+            }
+            params.put(name, valueStr);
+        }
+        String tradeStatus = params.get("trade_status");
+        log.info("支付宝回调,sign:{},trade_status:{},参数:{}", params.get("sign"), tradeStatus, params.toString());
+
+        //非常重要,验证回调的正确性,是不是支付宝发的.并且呢还要避免重复通知.
+        params.remove("sign_type");
+        try {
+            boolean alipayRSACheckedV2 = AlipaySignature.rsaCheckV2(params, Configs.getAlipayPublicKey(), "utf-8", Configs.getSignType());
+
+            if (!alipayRSACheckedV2) {
+                log.error("非法请求,验证不通过!");
+            }
+        } catch (AlipayApiException e) {
+            log.error("支付宝验证回调异常", e);
+        }
+
+        if ("TRADE_SUCCESS".equals(tradeStatus)) {
+            String outTradeNo = params.get("out_trade_no");
+            String key = alipayStateBaseKey + outTradeNo;
+            // 将付款状态地址缓存，时间为10分钟
+            try {
+                this.redisTemplate.opsForValue().set(key, tradeStatus, 10, TimeUnit.MINUTES);
+            } catch (Exception e) {
+                log.error("支付状态缓存异常,订单编号：{}", outTradeNo, e);
+            }
         }
     }
 

@@ -1,9 +1,10 @@
 package com.hilkr.common.response;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-24 21:41
- * @Feature: 返回结果
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class Result<T> {
 

@@ -19,8 +19,7 @@ import java.util.List;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-21
+ * @author hilkr
  */
 @Service
 public class BrandServiceImpl implements IBrandService {

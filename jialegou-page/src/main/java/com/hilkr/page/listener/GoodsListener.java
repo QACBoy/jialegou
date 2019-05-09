@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-21 14:45
- * @Feature: mq监听器，消费者
+ * 描述:
+ * mq监听器，消费者
+ *
+ * @author hilkr
  */
 @Component
 public class GoodsListener {

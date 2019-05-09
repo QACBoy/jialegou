@@ -15,9 +15,10 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-22 19:21
- * @Feature:短信服务监听器
+ * 描述:
+ * 短信服务监听器
+ *
+ * @author hilkr
  */
 @Component
 public class SmsListener {

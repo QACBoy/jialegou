@@ -4,9 +4,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-19 10:19
- * @Feature: 线程工具
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class ThreadUtils {
 

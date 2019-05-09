@@ -1,9 +1,10 @@
 package com.hilkr.page.service;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-19 09:40
- * @Feature: 页面详情静态化接口
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface IGoodsHtmlService {
 

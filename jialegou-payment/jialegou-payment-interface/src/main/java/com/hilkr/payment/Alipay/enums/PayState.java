@@ -1,9 +1,11 @@
 package com.hilkr.payment.Alipay.enums;
 
 /**
- * @author: HuYi.Zhang
- * @create: 2018-06-07 17:44
- **/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 public enum PayState {
     /**
      * 未支付0

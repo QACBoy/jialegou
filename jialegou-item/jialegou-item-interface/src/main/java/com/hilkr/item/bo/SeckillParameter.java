@@ -2,9 +2,10 @@ package com.hilkr.item.bo;
 
 
 /**
- * @Author: 98050
- * @Time: 2018-11-10 17:30
- * @Feature: 秒杀设置参数
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class SeckillParameter {
 

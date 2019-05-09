@@ -19,9 +19,10 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * @Author: 98050
- * Time: 2018-10-17 19:40
- * Feature:商品详情页信息
+ * 描述:
+ * 商品详情页信息
+ *
+ * @author hilkr
  */
 @Slf4j
 @Service

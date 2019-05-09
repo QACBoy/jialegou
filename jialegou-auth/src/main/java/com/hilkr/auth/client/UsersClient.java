@@ -7,8 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-04-21
+ * @author hilkr
  */
 @FeignClient(value = "users-service")
 public interface UsersClient extends UsersApi {

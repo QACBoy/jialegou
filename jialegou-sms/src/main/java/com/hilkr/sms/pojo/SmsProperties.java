@@ -5,9 +5,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-22 18:34
- * @Feature: 短信服务实体类
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 // @ConfigurationProperties(prefix = "jialegou.sms")
 @Configuration

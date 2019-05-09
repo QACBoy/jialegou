@@ -12,9 +12,10 @@ import java.util.Date;
 
 
 /**
- * @Author: 98050
- * @Time: 2018-11-14 23:31
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JialegouUsersApplication.class)

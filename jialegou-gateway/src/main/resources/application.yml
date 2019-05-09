@@ -35,6 +35,10 @@ zuul:
     seckill-service: /seckill/** #秒杀微服务
     comments-service: /review/** #评论微服务
     payment-service: /payment/** #支付微服务
+    upload-service:
+      path: /upload/**
+      serviceId: upload-service
+      strip-prefix: false
   ignored-services:
     - upload-service # 忽略upload-service服务
   add-host-header: true #携带请求本身的head头信息
@@ -71,3 +75,5 @@ jialegou:
        /api/user/code
        /api/item
        /api/payment/alipay
+       /api/upload/image
+       /zuul/api/upload/image

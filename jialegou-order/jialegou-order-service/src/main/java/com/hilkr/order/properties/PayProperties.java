@@ -5,9 +5,11 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author: 98050
- * @create: 2018-10-27 11:38
- **/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 //@ConfigurationProperties(prefix = "jialegou.pay")
 @Configuration
 @RefreshScope

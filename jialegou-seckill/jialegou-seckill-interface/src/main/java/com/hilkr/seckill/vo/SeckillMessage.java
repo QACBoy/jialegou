@@ -7,8 +7,7 @@ import com.hilkr.dal.model.SeckillSku;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-05-03
+ * @author hilkr
  */
 public class SeckillMessage {
     /**

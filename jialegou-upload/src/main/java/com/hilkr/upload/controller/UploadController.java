@@ -1,6 +1,7 @@
 package com.hilkr.upload.controller;
 
 import com.hilkr.upload.service.IUploadService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,16 +16,15 @@ import org.springframework.web.multipart.MultipartFile;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-21
+ * @author hilkr
  */
+@Slf4j
 @RestController
 @RequestMapping("upload")
 public class UploadController {
 
     @Autowired
     private IUploadService uploadService;
-
 
     /**
      * 图片的上传
@@ -34,6 +34,7 @@ public class UploadController {
      */
     @PostMapping("image")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        log.info("接收到图片上传请求...");
         String url= this.uploadService.uploadImage(file);
         if(StringUtils.isBlank(url)){
             //url为空，证明上传失败

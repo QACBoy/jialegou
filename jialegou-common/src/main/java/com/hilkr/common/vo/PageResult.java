@@ -5,13 +5,11 @@ import lombok.Data;
 
 import java.util.List;
 
-/***
+/**
+ * 描述:
+ * TODO
  *
- * 描述：
- *
- * @author sam
- * @date 2019/3/4
- *
+ * @author hilkr
  */
 @Data
 public class PageResult<T>{

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author bystander
- * @date 2018/9/22
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @RequestMapping("goods")
 public interface GoodsApi {

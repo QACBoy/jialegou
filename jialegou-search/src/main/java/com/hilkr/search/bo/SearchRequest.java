@@ -3,9 +3,10 @@ package com.hilkr.search.bo;
 import java.util.Map;
 
 /**
- * @Author: 98050
- * Time: 2018-10-12 20:08
- * Feature: 搜索业务对象
+ * 描述:
+ * 搜索业务对象
+ *
+ * @author hilkr
  */
 public class SearchRequest {
 

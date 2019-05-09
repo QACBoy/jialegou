@@ -17,9 +17,10 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * @Author: 98050
- * @Time: 2018-10-22 18:59
- * @Feature: 短信服务工具类
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Component
 // @EnableConfigurationProperties(SmsProperties.class)

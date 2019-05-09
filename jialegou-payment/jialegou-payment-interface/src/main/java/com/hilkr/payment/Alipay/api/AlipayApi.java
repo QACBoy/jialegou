@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-05-05
+ * @author hilkr
  */
 @RequestMapping("/payment/alipay")
 public interface AlipayApi {

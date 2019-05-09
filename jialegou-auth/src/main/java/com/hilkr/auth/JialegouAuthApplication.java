@@ -12,10 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-04-21
+ * @author hilkr
  */
-// @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication

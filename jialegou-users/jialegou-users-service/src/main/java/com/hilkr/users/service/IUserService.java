@@ -3,9 +3,10 @@ package com.hilkr.users.service;
 import com.hilkr.dal.model.User;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-21 18:41
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface IUserService {
     /**

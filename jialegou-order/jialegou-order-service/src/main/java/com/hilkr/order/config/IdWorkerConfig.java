@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author: 98050
- * @create: 2018-10-27
- **/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 @Configuration
 //@EnableConfigurationProperties(IdWorkerProperties.class)
 public class IdWorkerConfig {

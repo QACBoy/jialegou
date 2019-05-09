@@ -6,13 +6,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-/***
+/**
+ * 描述:
+ * TODO
  *
- * 描述：
- *
- * @author sam
- * @date 2019/3/3
- *
+ * @author hilkr
  */
 @EnableDiscoveryClient
 @EnableZuulProxy

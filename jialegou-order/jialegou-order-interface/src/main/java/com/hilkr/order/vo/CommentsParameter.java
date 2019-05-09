@@ -3,9 +3,10 @@ package com.hilkr.order.vo;
 import com.jialegou.comments.pojo.Review;
 
 /**
- * @Author: 98050
- * @Time: 2018-12-12 11:43
- * @Feature: 新增评论消息对象
+ * 描述:
+ * 评论消息对象
+ *
+ * @author hilkr
  */
 public class CommentsParameter {
 

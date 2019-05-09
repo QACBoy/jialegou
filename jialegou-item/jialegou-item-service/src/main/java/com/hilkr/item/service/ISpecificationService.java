@@ -5,11 +5,10 @@ import com.hilkr.dal.model.Specification;
 
 
 /**
- * 描述: <br>
+ * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-24
+ * @author hilkr
  */
 public interface ISpecificationService {
 

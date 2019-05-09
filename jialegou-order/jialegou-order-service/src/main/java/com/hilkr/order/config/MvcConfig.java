@@ -21,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author: 98050
- * @create: 2018-10-27
- **/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 @Configuration
 @EnableWebMvc
 // @EnableConfigurationProperties(JwtProperties.class)

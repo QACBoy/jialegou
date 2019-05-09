@@ -1,9 +1,10 @@
 package com.hilkr.order.vo;
 
 /**
- * @Author: 98050
- * @Time: 2018-12-10 23:27
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class OrderStatusMessage {
     /**

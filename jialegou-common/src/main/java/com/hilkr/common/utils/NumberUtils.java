@@ -10,9 +10,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author: 98050
- * @create: 2018-04-25 09:13
- **/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 public class NumberUtils {
 
     public static boolean isInt(Double num) {

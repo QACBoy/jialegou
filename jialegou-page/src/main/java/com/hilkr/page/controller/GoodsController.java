@@ -21,9 +21,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: 98050
- * Time: 2018-10-17 16:06
- * Feature: 商品详情页面跳转
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Controller
 @RequestMapping("item")

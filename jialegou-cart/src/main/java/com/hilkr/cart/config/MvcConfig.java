@@ -9,9 +9,11 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-25 19:48
- * @Feature: 配置过滤器
+ /**
+ * 描述:
+ * 过滤器配置
+ *
+ * @author hilkr
  */
 @Configuration
 //@EnableConfigurationProperties(JwtProperties.class)

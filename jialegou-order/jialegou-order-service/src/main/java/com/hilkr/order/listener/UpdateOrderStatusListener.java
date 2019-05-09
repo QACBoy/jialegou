@@ -21,9 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: 98050
- * @Time: 2018-12-10 23:12
- * @Feature: 自动修改订单状态：自动确认收货，自动评价
+ * 描述:
+ * 自动修改订单状态：自动确认收货，自动评价
+ *
+ * @author hilkr
  */
 @Component
 public class UpdateOrderStatusListener {

@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 描述: <br>
+ * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-24
+ * @author hilkr
  */
 @Service
 public class SpecificationServiceImpl implements ISpecificationService {

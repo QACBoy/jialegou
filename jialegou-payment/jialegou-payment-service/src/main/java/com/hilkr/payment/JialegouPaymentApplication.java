@@ -9,8 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-05-04
+ * @author hilkr
  */
 @EnableFeignClients
 @EnableDiscoveryClient

@@ -8,17 +8,15 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-/***
+/**
+ * 描述:
+ * TODO
  *
- * 描述：
- *
- * @author sam
- * @date 2019/3/3
- *
+ * @author hilkr
  */
-// @EnableDiscoveryClient
+
+@EnableDiscoveryClient
 @SpringBootApplication
-// TODO: 无效配置 org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.hilkr.dal.dao.StockMapper.insertList
 public class JialegouItemServiceApplication extends BaseApplication {
 
     public static void main(String[] args) {

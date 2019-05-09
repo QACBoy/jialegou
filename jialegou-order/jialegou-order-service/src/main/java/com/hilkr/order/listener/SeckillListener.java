@@ -22,9 +22,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-15 20:30
- * @Feature: 秒杀消息队列监听器
+ * 描述:
+ * 秒杀消息队列监听器
+ *
+ * @author hilkr
  */
 @Component
 public class SeckillListener {

@@ -11,10 +11,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
- * Cookie 工具类
+ * 描述:
+ * TODO
  *
- * @author li
- * @time 2018/8/5
+ * @author hilkr
  */
 public final class CookieUtils {
 
@@ -192,7 +192,7 @@ public final class CookieUtils {
 
         String serverName = request.getRequestURL().toString();
         // String serverName = "api.jialegou.com";
-        logger.info("=========== getDomainName ==========" + serverName);
+        // logger.info("=========== getDomainName ==========" + serverName);
         if (serverName == null || serverName.equals("")) {
             domainName = "";
         } else {

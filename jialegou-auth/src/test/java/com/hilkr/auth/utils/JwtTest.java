@@ -9,9 +9,10 @@ import java.security.PublicKey;
 import java.util.Date;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-23 20:58
- * @Feature: JWT测试
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class JwtTest {
     private static final String keyPath = "/Users/sam/Documents/Developer/swe15086/jialegou/jialegou-auth/src/main/resources/key/";

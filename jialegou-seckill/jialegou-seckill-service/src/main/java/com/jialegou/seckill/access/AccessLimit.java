@@ -6,9 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-23 23:38
- * @Feature: 接口限流注解
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

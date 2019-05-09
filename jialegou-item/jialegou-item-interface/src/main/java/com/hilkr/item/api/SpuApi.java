@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @Author: 98050
- * Time: 2018-10-11 20:06
- * Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @RequestMapping("spu")
 public interface SpuApi {

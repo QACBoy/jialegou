@@ -4,9 +4,10 @@ import com.hilkr.order.vo.CommentsParameter;
 import com.hilkr.order.vo.OrderStatusMessage;
 
 /**
- * @Author: 98050
- * @Time: 2018-12-10 23:17
- * @Feature: 发送延时消息和评论消息
+ * 描述:
+ * 发送延时消息和评论消息
+ *
+ * @author hilkr
  */
 public interface OrderStatusService {
 

@@ -40,7 +40,6 @@ public interface BrandMapper extends BaseMapper<Brand> {
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(Brand record);
 
     int insertSelective(Brand record);
 

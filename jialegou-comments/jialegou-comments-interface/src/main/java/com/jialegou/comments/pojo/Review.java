@@ -6,9 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-26 14:45
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class Review implements Serializable {
 

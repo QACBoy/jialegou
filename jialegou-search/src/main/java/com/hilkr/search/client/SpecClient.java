@@ -4,9 +4,10 @@ import com.hilkr.item.api.SpecApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
- * @Author: 98050
- * Time: 2018-10-11 20:50
- * Feature:特有属性FeignClient
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @FeignClient(value = "item-service")
 public interface SpecClient extends SpecApi {

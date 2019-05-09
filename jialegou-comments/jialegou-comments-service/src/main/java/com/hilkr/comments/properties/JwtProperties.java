@@ -11,9 +11,11 @@ import javax.annotation.PostConstruct;
 import java.security.PublicKey;
 
 /**
- * @author: 9805
- * @create: 2018-10-27
- **/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 //@ConfigurationProperties(prefix = "jialegou.jwt")
 @Configuration
 @RefreshScope
@@ -36,7 +38,7 @@ public class JwtProperties {
     private static final Logger logger = LoggerFactory.getLogger(JwtProperties.class);
 
     @PostConstruct
-    public void init(){
+    public void init() {
         try {
             // 获取公钥和私钥
             this.publicKey = RsaUtils.getPublicKey(pubKeyPath);

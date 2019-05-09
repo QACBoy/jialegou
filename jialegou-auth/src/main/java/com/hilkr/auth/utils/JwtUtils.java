@@ -11,9 +11,11 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 /**
- * @author: li
- * @create: 2018-10-23
- **/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 public class JwtUtils {
     /**
      * 私钥加密token

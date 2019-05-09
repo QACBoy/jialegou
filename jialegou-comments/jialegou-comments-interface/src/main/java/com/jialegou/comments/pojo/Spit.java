@@ -1,9 +1,10 @@
 package com.jialegou.comments.pojo;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-26 16:46
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class Spit {
     private String _id;

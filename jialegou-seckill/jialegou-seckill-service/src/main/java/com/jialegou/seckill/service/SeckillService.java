@@ -5,9 +5,10 @@ import com.hilkr.dal.model.SeckillSku;
 import com.hilkr.seckill.vo.SeckillMessage;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-10 16:56
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface SeckillService {
 

@@ -11,9 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-24 16:55
- * @Feature: 过滤白名单
+ * 描述:
+ * 白名单过滤
+ *
+ * @author hilkr
  */
 //@ConfigurationProperties(prefix = "jialegou.filter")
 @Configuration

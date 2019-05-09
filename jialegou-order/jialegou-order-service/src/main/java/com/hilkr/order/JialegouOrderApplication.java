@@ -12,8 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-05-01
+ * @author hilkr
  */
 @SpringBootApplication
 @EnableDiscoveryClient

@@ -10,8 +10,7 @@ import org.springframework.web.filter.CorsFilter;
  * 描述:
  * 使用CORS，用于解决ajax跨域访问问题
  *
- * @author sam
- * @create 2019-03-21
+ * @author hilkr
  */
 @Configuration
 public class GlobalCorsConfig {
@@ -23,7 +22,8 @@ public class GlobalCorsConfig {
         //1) 允许的域,不要写*，否则cookie就无法使用了
         config.addAllowedOrigin("http://manage.jialegou.com");
         config.addAllowedOrigin("http://www.jialegou.com");
-        // config.addAllowedOrigin("http://image.jialegou.com");
+        config.addAllowedOrigin("http://image.jialegou.com");
+
         //2) 是否发送Cookie信息
         config.setAllowCredentials(true);
         //3) 允许的请求方式

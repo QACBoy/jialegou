@@ -5,9 +5,10 @@ import com.hilkr.cart.pojo.Cart;
 import java.util.List;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-25 20:47
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface ICartService {
     /**

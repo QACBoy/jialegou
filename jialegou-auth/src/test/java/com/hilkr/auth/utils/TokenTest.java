@@ -10,10 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.*;
 
 /**
-* @Author: 98050
-* @Time: 2018-11-15 00:00
-* @Feature: 获取5000用户的Token，写入文件中
-*/
+ * 描述:
+ * 获取5000用户的Token，写入文件中，主要用于秒杀服务测试
+ *
+ * @author hilkr
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JialegouAuthApplication.class)
 public class TokenTest {

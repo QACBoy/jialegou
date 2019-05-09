@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * @author bystander
- * @date 2018/9/22
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @RequestMapping("brand")
 public interface BrandApi {

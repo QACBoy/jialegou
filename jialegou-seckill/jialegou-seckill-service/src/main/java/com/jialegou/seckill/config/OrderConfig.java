@@ -12,9 +12,10 @@ import java.util.Enumeration;
 
 
 /**
- * @Author: 98050
- * @Time: 2018-11-13 22:39
- * @Feature: order服务配置，转发header
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Configuration
 public class OrderConfig {

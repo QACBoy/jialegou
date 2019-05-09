@@ -20,8 +20,7 @@ import java.io.IOException;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-21
+ * @author hilkr
  */
 @Service
 @Slf4j
@@ -61,6 +60,7 @@ public class UploadServiceImpl implements IUploadService {
                     file.getInputStream(), file.getSize(), getExtension(file.getOriginalFilename()), null);
             //返回保存图片的完整url
             String url = prop.getBaseUrl() + storePath.getFullPath();
+            log.info("保存图片的完整url:{}",url);
             return url;
         } catch (IOException e) {
             throw new JialegouException(ExceptionEnum.UPLOAD_IMAGE_EXCEPTION);

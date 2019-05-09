@@ -28,9 +28,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-10 16:57
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Service
 public class SeckillServiceImpl implements SeckillService {

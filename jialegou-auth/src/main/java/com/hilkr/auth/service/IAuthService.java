@@ -1,9 +1,10 @@
 package com.hilkr.auth.service;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-23 22:46
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface IAuthService {
     /**

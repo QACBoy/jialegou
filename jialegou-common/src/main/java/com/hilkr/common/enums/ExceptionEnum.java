@@ -2,14 +2,12 @@ package com.hilkr.common.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-/***
+
+/**
+ * 描述:
+ * TODO
  *
- * 描述：
- * 异常枚举
- *
- * @author sam
- * @date 2019/3/4
- *
+ * @author hilkr
  */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -58,10 +56,7 @@ public enum ExceptionEnum {
     SPEC_GROUP_CREATE_FAILED(500, "新增规格组失败"),
     SPEC_GROUP_NOT_FOUND(204, "规格组查询失败"),
     DELETE_SPEC_GROUP_FAILED(500, "商品规格组删除失败"),
-    UPDATE_SPEC_GROUP_FAILED(500, "商品规格组更新失败"),
-
-
-    ;
+    UPDATE_SPEC_GROUP_FAILED(500, "商品规格组更新失败"),;
     int value;
     String message;
 

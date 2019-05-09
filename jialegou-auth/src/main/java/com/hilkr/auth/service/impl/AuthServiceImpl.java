@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-23 22:47
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Service
 public class AuthServiceImpl implements IAuthService {

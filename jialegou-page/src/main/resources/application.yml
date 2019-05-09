@@ -43,4 +43,4 @@ hystrix:
             timeoutInMillisecond: 100000 # 熔断超时时长：10000ms
 jialegou:
   webpage:
-    path: /Users/sam/Documents/Developer/swe15086/jialegou/jialegou-page/src/main/resources/webpages
+    path: /Users/sam/Documents/Developer/swe15086/jialegou/jialegou-page/src/main/resources/webpages/

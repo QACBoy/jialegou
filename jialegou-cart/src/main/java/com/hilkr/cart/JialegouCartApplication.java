@@ -6,9 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-24 20:46
- * @Feature:购物车启动器
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @SpringBootApplication
 @EnableDiscoveryClient

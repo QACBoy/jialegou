@@ -5,11 +5,19 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.hilkr.dal.model.Sku;
 import com.hilkr.dal.model.Spu;
 import com.hilkr.dal.model.SpuDetail;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 @Getter
 @Setter
 @ToString

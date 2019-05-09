@@ -18,10 +18,9 @@ import javax.sql.DataSource;
 
 /**
  * 描述:
- * ${DESCRIPTION}
+ * TODO
  *
- * @author sam
- * @create 2019-03-20
+ * @author hilkr
  */
 @Configuration
 @MapperScan("com.hilkr.dal.dao*")//这个注解，作用相当于下面的@Bean MapperScannerConfigurer，2者配置1份即可

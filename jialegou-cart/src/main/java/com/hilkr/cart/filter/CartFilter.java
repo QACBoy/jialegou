@@ -6,9 +6,10 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-25 20:00
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 // @WebFilter(filterName = "CartFilter",urlPatterns = {"/**"})
 public class CartFilter implements Filter {

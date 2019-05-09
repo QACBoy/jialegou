@@ -1,9 +1,10 @@
 package com.hilkr.comments.bo;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-26 21:40
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class CommentRequestParam {
     /**

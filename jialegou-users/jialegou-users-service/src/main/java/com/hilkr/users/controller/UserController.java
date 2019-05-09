@@ -16,9 +16,10 @@ import javax.validation.Valid;
 
 
 /**
- * @Author: 98050
- * @Time: 2018-10-21 18:40
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Controller
 public class UserController {
@@ -89,6 +90,15 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+    @GetMapping("update")
+    public ResponseEntity<User> updatePassword(@RequestParam("username") String username, @RequestParam("oldPassword") String oldPassword, @RequestParam("password") String password) {
+        if (!userService.updatePassword(username,oldPassword,password)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        User user = this.userService.queryUser(username, password);
+        return ResponseEntity.ok(user);
+    }
+
     @GetMapping("test/{id}")
     public ResponseEntity<User> test(@PathVariable("id") Long id) {
         User user = this.userService.test(id);

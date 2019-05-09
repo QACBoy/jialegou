@@ -1,9 +1,10 @@
 package com.hilkr.common.parameter.pojo;
 
 /**
- * @Author: 98050
- * Time: 2018-08-08 11:38
- * Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public class BrandQueryByPageParameter {
 

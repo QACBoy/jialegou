@@ -13,10 +13,9 @@ import java.util.List;
 
 /**
  * 描述:
- * ${DESCRIPTION}
+ * TODO
  *
- * @author sam
- * @create 2019-03-21
+ * @author hilkr
  */
 @RestController
 @RequestMapping("brand")

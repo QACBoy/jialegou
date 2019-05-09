@@ -18,9 +18,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-24 16:21
- * @Feature: 登录拦截器
+ * 描述:
+ * 登录拦截
+ *
+ * @author hilkr
  */
 @Component
 public class LoginFilter extends ZuulFilter {

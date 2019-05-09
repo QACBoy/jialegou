@@ -18,9 +18,10 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: 98050
- * @Time: 2018-11-23 23:45
- * @Feature: 接口限流拦截器
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Service
 public class AccessInterceptor extends HandlerInterceptorAdapter {

@@ -17,11 +17,10 @@ import java.util.List;
 
 
 /**
- * 描述: <br>
+ * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-29
+ * @author hilkr
  */
 public interface IGoodsService extends IService<Stock> {
     /**

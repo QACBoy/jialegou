@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-05-05
+ * @author hilkr
  */
 @RestController
 public class GatewayController {

@@ -43,9 +43,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * @Author: 98050
- * Time: 2018-10-11 22:59
- * Feature: 搜索功能
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Service
 public class SearchServiceImpl implements ISearchService {

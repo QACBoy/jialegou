@@ -8,9 +8,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 
 /**
- * @Author: 98050
- * @Time: 2018-11-26 20:51
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface CommentDao extends MongoRepository<Review, String> {
 

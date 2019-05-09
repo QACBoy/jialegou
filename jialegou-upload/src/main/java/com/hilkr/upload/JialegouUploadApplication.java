@@ -9,8 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-21
+ * @author hilkr
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableDiscoveryClient

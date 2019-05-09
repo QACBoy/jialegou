@@ -3,14 +3,11 @@ package com.hilkr.common.exception;
 import com.hilkr.common.enums.ExceptionEnum;
 import lombok.Getter;
 
-/***
+/**
+ * 描述:
+ * TODO
  *
- * 描述：
- * 自定义异常类
- *
- * @author sam
- * @date 2019/3/4
- *
+ * @author hilkr
  */
 @Getter
 public class JialegouException extends RuntimeException {

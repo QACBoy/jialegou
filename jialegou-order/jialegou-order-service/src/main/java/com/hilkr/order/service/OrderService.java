@@ -7,9 +7,10 @@ import com.hilkr.dal.model.OrderStatus;
 import java.util.List;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-27 16:34
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface OrderService {
     /**

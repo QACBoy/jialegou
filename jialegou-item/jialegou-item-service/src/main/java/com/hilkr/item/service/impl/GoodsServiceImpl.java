@@ -31,16 +31,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 描述: <br>
+ * 描述:
  * TODO
  *
- * @author sam
- * @create 2019-03-29
+ * @author hilkr
  */
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Slf4j
 @Service
-// TODO: org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.hilkr.dal.dao.StockMapper.insertList
 public class GoodsServiceImpl extends ServiceImpl<StockMapper, Stock> implements IGoodsService {
 
 

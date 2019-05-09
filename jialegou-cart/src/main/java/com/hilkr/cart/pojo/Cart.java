@@ -1,9 +1,11 @@
 package com.hilkr.cart.pojo;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-25 20:27
- * @Feature: 购物车实体类
+ * 描述:
+ * 购物车实体
+ * redis
+ *
+ * @author hilkr
  */
 public class Cart {
     /**

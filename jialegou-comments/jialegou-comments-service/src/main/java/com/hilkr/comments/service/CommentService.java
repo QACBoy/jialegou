@@ -6,9 +6,10 @@ import org.springframework.data.domain.Page;
 
 
 /**
- * @Author: 98050
- * @Time: 2018-11-26 15:40
- * @Feature:
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface CommentService {
 

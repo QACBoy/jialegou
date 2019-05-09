@@ -8,7 +8,7 @@ spring:
   data:
     mongodb:
       host: 192.168.43.219
-      database: jialegoudb
+      database: spit
   datasource:
     url: jdbc:mysql://localhost:3306/jialegou
     username: tester

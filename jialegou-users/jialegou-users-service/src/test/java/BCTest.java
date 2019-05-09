@@ -2,10 +2,11 @@ import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
-* @Author: 98050
-* @Time: 2018-11-06 15:13
-* @Feature: BCryptPasswordEncoder测试
-*/
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
+ */
 public class BCTest {
 
    @Test

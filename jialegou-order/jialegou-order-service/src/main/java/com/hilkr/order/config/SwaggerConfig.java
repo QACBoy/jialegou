@@ -10,7 +10,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * @author 98050
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 @Configuration
 public class SwaggerConfig {

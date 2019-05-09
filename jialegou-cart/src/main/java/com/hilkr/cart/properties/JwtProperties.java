@@ -11,9 +11,10 @@ import javax.annotation.PostConstruct;
 import java.security.PublicKey;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-25 16:12
- * @Feature: jwt属性
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 //@ConfigurationProperties(prefix = "jialegou.jwt")
 @Configuration

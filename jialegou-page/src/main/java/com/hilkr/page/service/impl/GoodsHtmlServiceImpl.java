@@ -16,9 +16,10 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 /**
- * @Author: 98050
- * @Time: 2018-10-19 09:46
- * @Feature: 实现页面静态化接口
+ * 描述:
+ * 实现页面静态化接口
+ *
+ * @author hilkr
  */
 @Slf4j
 @Service

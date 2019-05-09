@@ -8,9 +8,10 @@ import com.hilkr.search.vo.SearchResult;
 import java.io.IOException;
 
 /**
- * @Author: 98050
- * Time: 2018-10-17 19:33
- * Feature: 搜索功能
+ * 描述:
+ * TODO
+ *
+ * @author hilkr
  */
 public interface ISearchService {
 
